@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Cannon : MonoBehaviour
+public class JICannon : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody cannonballInstance;
+    [SerializeField] private Rigidbody cannonballInstance;
 
     [SerializeField]
     [Range(10f, 80f)]
@@ -28,7 +25,6 @@ public class Cannon : MonoBehaviour
     private void FireCannonAtPoint(Vector3 point)
     {
         var velocity = BallisticVelocity(point, angle);
-        Debug.Log("Firing at " + point + " velocity " + velocity);
 
         cannonballInstance.transform.position = transform.position;
         cannonballInstance.velocity = velocity;

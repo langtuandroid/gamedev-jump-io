@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TutorialScript : MonoBehaviour
+public class JITutorialScript : MonoBehaviour
 {
-    public GameObject tutorialPanel;
+    [SerializeField] private GameObject tutorialPanel;
+    
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
