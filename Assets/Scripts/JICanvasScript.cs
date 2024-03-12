@@ -37,10 +37,15 @@ public class JICanvasScript : MonoBehaviour
 
     private void OnLevelCompletedAction(int place)
     {
+        levelNoText.gameObject.SetActive(false);
         tryAgainButton.SetActive(place > 1);
         continueButton.SetActive(place == 1);
         _levelIndex++;
-        if(_levelIndex <= 35 && PlayerPrefs.GetInt("Level No.") < _levelIndex) PlayerPrefs.SetInt("Level No.", _levelIndex);
+        if (_levelIndex <= 35 && PlayerPrefs.GetInt("Level No.") < _levelIndex)
+        {
+            Debug.Log("Level No." + _levelIndex);
+            PlayerPrefs.SetInt("Level No.", _levelIndex);
+        }
     }
 
     private void Update()

@@ -9,6 +9,7 @@ public class JIPlayerFollow : MonoBehaviour
     private int _screenHeight;
     private int _screenWidth;
     private float _cameraZPosition;
+    private bool _coroutineStarted = false;
 
     private void Awake()
     {
@@ -47,8 +48,9 @@ public class JIPlayerFollow : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, finishPosition.position, 3 * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 3 * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position, finishPosition.position) > 0.1)
+        if(Vector3.Distance(transform.position, finishPosition.position) > 0.1 && !_coroutineStarted)
         {
+            _coroutineStarted = true;
             yield return new WaitForSeconds(2);
             JIGameManager.Instance.LevelCompletePanelOn();
         }
