@@ -93,7 +93,8 @@ public class JIGameManager : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0) && !play)
         {
-            startTimer.SetActive(true);
+            //startTimer.SetActive(true);
+            PopupsManager.Instance.ShowPopup(PopupType.TimerPopup);
             StartCoroutine(StartRunning());
         }
 

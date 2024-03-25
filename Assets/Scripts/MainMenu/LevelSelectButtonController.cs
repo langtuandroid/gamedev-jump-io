@@ -16,12 +16,16 @@ public class LevelSelectButtonController : MonoBehaviour
         var isUnlocked = _levelIndex <= PlayerPrefs.GetInt("Level No.", 1);
         _lockImage.enabled = !isUnlocked;
         _thisButton.interactable = isUnlocked;
-        _levelText.text = _levelIndex.ToString();
+        if (isUnlocked)
+            _levelText.text = _levelIndex.ToString();
+        else
+            _levelText.text = "";
         _thisButton.onClick.AddListener(SelectLevel);
     }
 
     private void SelectLevel()
     {
+        Debug.Log("levelindex "+ _levelIndex);
         SceneManager.LoadScene(_levelIndex);
     }
 }
