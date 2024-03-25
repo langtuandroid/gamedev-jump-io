@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class JICanvasScript : MonoBehaviour
 {
-    [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private TextMeshProUGUI levelNoText;
 
     [Space]
@@ -13,8 +12,6 @@ public class JICanvasScript : MonoBehaviour
     [SerializeField] private Slider playerSlider;
     [SerializeField] private Transform playerStartPosition;
     [SerializeField] private Transform playerEndPosition;
-    [SerializeField] private GameObject tryAgainButton;
-    [SerializeField] private GameObject continueButton;
 
     [Space]
     [Header("For 2nd Player")]
@@ -38,8 +35,7 @@ public class JICanvasScript : MonoBehaviour
     private void OnLevelCompletedAction(int place)
     {
         levelNoText.gameObject.SetActive(false);
-        tryAgainButton.SetActive(place > 1);
-        continueButton.SetActive(place == 1);
+        PopupsManager.Instance.ShowPopup(PopupType.LevelResultPopup, (place == 1).ToString());
         _levelIndex++;
         if (_levelIndex <= 35 && PlayerPrefs.GetInt("Level No.") < _levelIndex)
         {
@@ -64,19 +60,5 @@ public class JICanvasScript : MonoBehaviour
 
     }
     
-    public void TutorialPanelOff()
-    {
-        tutorialPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
     
-    public void Reload()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void Next()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex >= 35 ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
-    }
 }

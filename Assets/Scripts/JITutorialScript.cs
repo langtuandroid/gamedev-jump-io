@@ -8,8 +8,8 @@ public class JITutorialScript : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            tutorialPanel.SetActive(true);
             Time.timeScale = 0;
+            PopupsManager.Instance.ShowPopup(PopupType.StartingTutorialPopup);
         }
     }
 }

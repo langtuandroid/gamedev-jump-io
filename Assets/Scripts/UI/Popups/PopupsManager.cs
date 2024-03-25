@@ -4,7 +4,9 @@ using UnityEngine;
 public enum PopupType
 {
     None = 0,
-    TimerPopup=1
+    StartLevelPopup=1,
+    StartingTutorialPopup=2,
+    LevelResultPopup=3
 }
 
 public class PopupsManager : MonoBehaviour
@@ -25,16 +27,15 @@ public class PopupsManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(Instance);
     }
-    public BasePopup ShowPopup(PopupType t)
+    public BasePopup ShowPopup(PopupType t, string json =null)
     {
         HideCurrentPopup();
 
         BasePopup p = Array.Find(_popups, x => x.Type == t);
         if (p != null)
         {
-            ((IPopup)p).Show();
+            ((IPopup)p).Show(json);
             _activePopup = p;
 
             return p;

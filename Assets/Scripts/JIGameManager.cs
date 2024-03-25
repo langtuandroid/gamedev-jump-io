@@ -88,13 +88,16 @@ public class JIGameManager : MonoBehaviour
         finishedPlayers = 0;
         _audioSource = GetComponent<AudioSource>();
     }
+    private void Start()
+    {
+        PopupsManager.Instance.ShowPopup(PopupType.StartLevelPopup);
+    }
 
     private void Update()
     {
         if(Input.GetMouseButtonUp(0) && !play)
         {
             //startTimer.SetActive(true);
-            PopupsManager.Instance.ShowPopup(PopupType.TimerPopup);
             StartCoroutine(StartRunning());
         }
 

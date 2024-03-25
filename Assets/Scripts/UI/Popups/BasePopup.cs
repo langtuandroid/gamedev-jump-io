@@ -2,27 +2,23 @@ using UnityEngine;
 
 public interface IPopup
 {
-    void Show();
+    void Show(string json);
     void Hide();
-  
+    public void AfterShow(string json);
 }
-public interface IAfterShow
-{
-    public void AfterShow();
-}
-public class BasePopup : MonoBehaviour, IPopup, IAfterShow
+public class BasePopup : MonoBehaviour, IPopup
 {
     [SerializeField]
     private PopupType _type = PopupType.None;
 
     public PopupType Type => _type;
 
-    void IPopup.Show()
+    void IPopup.Show(string json )
     {
         gameObject.SetActive(true);
-        AfterShow();
+        AfterShow(json);
     }
-     public virtual void AfterShow()
+    public virtual void AfterShow(string json)
     {
 
     }
