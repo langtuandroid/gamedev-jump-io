@@ -15,8 +15,7 @@ public class LevelResultPopup : BasePopup
     }
     public override void AfterShow(string json)
     {
-        bool isFirstPlace;
-        bool.TryParse(json, out isFirstPlace);
+        bool isFirstPlace = JsonUtility.FromJson<bool>(json);
         if (isFirstPlace)
             nextLevelBtn.SetActive(true);
         else

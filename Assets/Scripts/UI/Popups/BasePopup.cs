@@ -13,7 +13,7 @@ public class BasePopup : MonoBehaviour, IPopup
 
     public PopupType Type => _type;
 
-    void IPopup.Show(string json )
+    void IPopup.Show(string json)
     {
         gameObject.SetActive(true);
         AfterShow(json);

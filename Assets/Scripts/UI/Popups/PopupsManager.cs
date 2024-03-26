@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public enum PopupType
 {
@@ -8,27 +9,20 @@ public enum PopupType
     StartingTutorialPopup=2,
     LevelResultPopup=3
 }
-
-public class PopupsManager : MonoBehaviour
+public interface IPopupManager
 {
-    public static PopupsManager Instance { get; private set; }
-
+    public BasePopup ShowPopup(PopupType t, string json = null);
+    public void HideCurrentPopup();
+}
+public class PopupsManager : MonoBehaviour, IPopupManager
+{
+    public class Factory : PlaceholderFactory<PopupsManager>{}
     [SerializeField]
     private BasePopup[] _popups = null;
 
     private BasePopup _activePopup;
-
-    [ContextMenu("FindPopups")]
-    private void FindPopups()
-    {
-        _popups = GetComponentsInChildren<BasePopup>(true);
-    }
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-    public BasePopup ShowPopup(PopupType t, string json =null)
+        
+    public BasePopup ShowPopup(PopupType t, string json = null)
     {
         HideCurrentPopup();
 

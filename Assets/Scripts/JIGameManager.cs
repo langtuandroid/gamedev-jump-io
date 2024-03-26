@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class JIGameManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class JIGameManager : MonoBehaviour
     public Rigidbody player;
     public bool finish;
     public bool fastSpeedOn;
+    [SerializeField] private bool _isUseBoosterJumpUp;
+    [SerializeField] private bool _isUseBoosterFreezeAll;
+    public bool IsUseBoosterJumpUp { get { return _isUseBoosterJumpUp; } }
+    public bool IsUseBoosterFreezeAll { get { return _isUseBoosterFreezeAll; } }
 
     [Header("Fire works")]
     public List<GameObject> blast;
@@ -81,16 +86,20 @@ public class JIGameManager : MonoBehaviour
     public AudioClip stage;
     private AudioSource _audioSource;
     public int finishedPlayers;
+    [Inject] private IPopupManager _popupsManager;
 
+
+  
     private void Awake()
     {
         Instance = this;
         finishedPlayers = 0;
         _audioSource = GetComponent<AudioSource>();
     }
+
     private void Start()
     {
-        PopupsManager.Instance.ShowPopup(PopupType.StartLevelPopup);
+        _popupsManager.ShowPopup(PopupType.StartLevelPopup);
     }
 
     private void Update()

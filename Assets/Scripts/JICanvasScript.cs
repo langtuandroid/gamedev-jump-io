@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using Zenject;
 public class JICanvasScript : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI levelNoText;
@@ -23,6 +23,7 @@ public class JICanvasScript : MonoBehaviour
     [SerializeField] private Slider otherPlayer2Slider;
     [SerializeField] private Transform otherPlayer2StartPosition;
 
+    [Inject] private IPopupManager _popusManager;
     private int _levelIndex;
 
     private void Start()
@@ -35,7 +36,7 @@ public class JICanvasScript : MonoBehaviour
     private void OnLevelCompletedAction(int place)
     {
         levelNoText.gameObject.SetActive(false);
-        PopupsManager.Instance.ShowPopup(PopupType.LevelResultPopup, (place == 1).ToString());
+        _popusManager.ShowPopup(PopupType.LevelResultPopup, JsonUtility.ToJson(place==1));
         _levelIndex++;
         if (_levelIndex <= 35 && PlayerPrefs.GetInt("Level No.") < _levelIndex)
         {
