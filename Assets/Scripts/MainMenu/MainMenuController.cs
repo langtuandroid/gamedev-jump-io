@@ -32,6 +32,7 @@ namespace UiControllers
             _backToMainMenuButton.SetActive(true);
             _mainMenuPanel.SetActive(false);
             _settingPanel.SetActive(true);
+            _gameNameText.SetActive(false);
         }
 
         public void AudioButton()
@@ -43,14 +44,6 @@ namespace UiControllers
             else
                 _soundIconImage.color = new Color(1, 1, 1);
             JIBackgroundMusic.Instance.gameObject.SetActive(PlayerPrefs.GetInt("Audio", 0) == 0);
-        }
-        public void PrivacyButton()
-        {
-
-        }
-        public void TermofUseButton()
-        {
-
         }
         public void PlayButton()
         {
