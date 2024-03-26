@@ -20,8 +20,10 @@ public class JIGameManager : MonoBehaviour
     public bool fastSpeedOn;
     [SerializeField] private bool _isUseBoosterJumpUp;
     [SerializeField] private bool _isUseBoosterFreezeAll;
+    [SerializeField] private bool _isUseBoosterSpeedUp;
     public bool IsUseBoosterJumpUp { get { return _isUseBoosterJumpUp; } }
     public bool IsUseBoosterFreezeAll { get { return _isUseBoosterFreezeAll; } }
+    public bool IsUseBoosterSpeedUp { get { return _isUseBoosterSpeedUp; } }
 
     [Header("Fire works")]
     public List<GameObject> blast;

@@ -974,8 +974,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 52, y: -15}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 52, y: -60}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5237324193045161137
 CanvasRenderer:
@@ -2839,8 +2839,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -52, y: -15}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: -52, y: -60}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7864692532877558899
 CanvasRenderer:
@@ -4628,3 +4628,4 @@ MonoBehaviour:
   skipBtn: {fileID: 5017158490410229309}
   _freezSprite: {fileID: 21300000, guid: f4e1c9648e4d6634e8806db734618be6, type: 3}
   _jumpUpSprite: {fileID: 21300000, guid: ecdd16f4cbe86a9479f1ffaf174e6285, type: 3}
+  _speedUpSprite: {fileID: 21300000, guid: 662dd19f52e8d984cb63cf40cb94ef6e, type: 3}

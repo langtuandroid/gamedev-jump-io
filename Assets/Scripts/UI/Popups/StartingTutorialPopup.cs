@@ -14,8 +14,8 @@ public class StartingTutorialPopup : BasePopup
     [SerializeField] private Button skipBtn;
 
     [SerializeField] private Sprite _freezSprite;
-
     [SerializeField] private Sprite _jumpUpSprite;
+    [SerializeField] private Sprite _speedUpSprite;
 
     [Inject] private IPopupManager _popupsManager;
     private void Start()
@@ -44,6 +44,12 @@ public class StartingTutorialPopup : BasePopup
                 _tutorialBottomText.text = "Tap To Continue";
                 _boosterImg.sprite = _freezSprite;
                 _tutorialUpText.text = "This is freeze power up, take it to freeze your opponents, active for 3 sec";
+            }
+            if(currentBoosterType== BoosterType.SpeedUp)
+            {
+                _tutorialBottomText.text = "Tap To Continue";
+                _boosterImg.sprite = _speedUpSprite;
+                _tutorialUpText.text = "This is hight speed power up, take it to increase your speed and become invincible for 5 sec";
             }
         }
     }

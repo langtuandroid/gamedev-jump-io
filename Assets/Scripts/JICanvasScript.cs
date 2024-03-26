@@ -36,7 +36,7 @@ public class JICanvasScript : MonoBehaviour
     private void OnLevelCompletedAction(int place)
     {
         levelNoText.gameObject.SetActive(false);
-        _popusManager.ShowPopup(PopupType.LevelResultPopup, JsonUtility.ToJson(place==1));
+        _popusManager.ShowPopup(PopupType.LevelResultPopup, (place==1).ToString());
         _levelIndex++;
         if (_levelIndex <= 35 && PlayerPrefs.GetInt("Level No.") < _levelIndex)
         {
@@ -60,6 +60,9 @@ public class JICanvasScript : MonoBehaviour
         }
 
     }
-    
-    
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }

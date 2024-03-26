@@ -4,7 +4,8 @@ public enum BoosterType
 {
     None, 
     FreezeAll,
-    JumpUp
+    JumpUp,
+    SpeedUp
 }
 public class JITutorialScript : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class JITutorialScript : MonoBehaviour
         else
         if (JIGameManager.Instance.IsUseBoosterJumpUp)
             currentBoosterType = BoosterType.JumpUp;
+        else
+            if(JIGameManager.Instance.IsUseBoosterSpeedUp)
+            currentBoosterType = BoosterType.SpeedUp;
         else
             currentBoosterType = BoosterType.None;
     }
