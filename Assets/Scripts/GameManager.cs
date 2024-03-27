@@ -9,6 +9,7 @@ using Zenject;
 
 public class GameManager : MonoBehaviour
 {
+
     public Action<int> ON_LEVEL_COMPLETED_ACTION;
 
 
@@ -42,7 +43,13 @@ public class GameManager : MonoBehaviour
     public GameObject otherPlayer1;
     public GameObject otherPlayer2;
 
-  
+    [Header("UI elements")]
+    public Image timeImage;
+    public TextMeshProUGUI timeText;
+    public int integerTimer;
+    public GameObject timer;
+    public GameObject startTimer;
+
     [Header("Particle effects")]
     public GameObject jumpEffect;
     public GameObject finishEffect;
@@ -74,11 +81,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject levelCompletePanel;
 
-   
     public int finishedPlayers;
-    [Inject] private IPopupManager popupsManager;
-    [Inject] private TrajectoryManager trajectoryManager;
-    public event UnityAction<int> StartTimerEvent;
+    [Inject] private IPopupManager _popupsManager;
+
 
 
     private void Awake()
@@ -88,27 +93,28 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        popupsManager.ShowPopup(PopupType.StartLevelPopup);
+        _popupsManager.ShowPopup(PopupType.StartLevelPopup);
     }
 
     private void Update()
     {
-        if(Input.GetMouseButtonUp(0) && !play)
+        if (Input.GetMouseButtonUp(0) && !play)
         {
+            //startTimer.SetActive(true);
             StartCoroutine(StartRunning());
         }
 
-       /* if(fastSpeedOn)
+        if (fastSpeedOn)
         {
             tempTime -= Time.deltaTime;
             timeImage.fillAmount = tempTime / time;
             integerTimer = Mathf.RoundToInt(tempTime);
             timeText.text = integerTimer.ToString();
-            if(tempTime < 0)
+            if (tempTime < 0)
             {
                 timer.SetActive(false);
             }
-        }*/
+        }
     }
 
     public void CharacterJump()
@@ -131,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     public void StoneHit()
     {
-        if(!fastSpeedOn)
+        if (!fastSpeedOn)
         {
             player.GetComponent<Animator>().SetInteger("Character Animator", 9);
             playerRunControl = false;
@@ -142,7 +148,7 @@ public class GameManager : MonoBehaviour
         {
             playerRunControl = true;
         }
-       
+
     }
     public void FireWorks()
     {
@@ -166,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     public void CalculateOtherPlayers()
     {
-        
+
         players[1].transform.position = playerPos[1].position;
         players[1].GetComponent<Animator>().SetInteger("WinAnimation", (1 + 1));
 
@@ -178,11 +184,9 @@ public class GameManager : MonoBehaviour
 
     public void FastSpeedOnFunction()
     {
-      /*  fastSpeedOn = true;
-        timer.SetActive(true);*/
-        StartTimerEvent?.Invoke(5);
-
-       trajectoryManager.carMoveSpeed = 15;
+        fastSpeedOn = true;
+        timer.SetActive(true);
+        TrajectoryManager.Instance.carMoveSpeed = 15;
         trailEffectSpine.SetActive(true);
         trailEffectLeftHand.SetActive(true);
         trailEffectRighttHand.SetActive(true);
@@ -190,25 +194,33 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpeedControler());
     }
 
-
     private void FastSpeedOffFunction()
     {
-       trajectoryManager.carMoveSpeed = 10;
-       trajectoryManager.lineRenderer.enabled = false;
+        fastSpeedOn = false;
+        TrajectoryManager.Instance.carMoveSpeed = 10;
+        TrajectoryManager.Instance.lineRenderer.enabled = false;
         trailEffectSpine.SetActive(false);
         trailEffectLeftHand.SetActive(false);
         trailEffectRighttHand.SetActive(false);
+        timer.SetActive(false);
+        tempTime = time;
     }
 
     public void LongJumpOnFunction()
     {
-        StartTimerEvent?.Invoke(3);
+        time = 3;
+        tempTime = 3;
+        timer.SetActive(true);
+        fastSpeedOn = true;
         StartCoroutine(LongJumpControlFunction());
     }
 
     public void FreeeTimerOn()
     {
-        StartTimerEvent?.Invoke(3);
+        time = 3;
+        tempTime = 3;
+        timer.SetActive(true);
+        fastSpeedOn = true;
         StartCoroutine(FreeTimerControl());
     }
 
@@ -233,7 +245,7 @@ public class GameManager : MonoBehaviour
     {
         ON_LEVEL_COMPLETED_ACTION?.Invoke(finishedPlayers + 1);
         levelCompletePanel.SetActive(true);
-        
+
     }
 
     public void FreezePlayers()
@@ -284,8 +296,6 @@ public class GameManager : MonoBehaviour
         smallTrajectory.SetActive(false);
         longTrajectory.SetActive(true);
 
-        trajectoryManager.isUseStandartTrajectory = false;
-
         yield return new WaitForSeconds(3f);
         LongJumpOffFunction();
     }
@@ -299,7 +309,7 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerFall()
     {
         yield return new WaitForSeconds(3);
-        player.GetComponent<Animator>().SetInteger("Character Animator", 3);        
+        player.GetComponent<Animator>().SetInteger("Character Animator", 3);
         playerRunControl = true;
         trajectoryOn = true;
     }
@@ -314,20 +324,22 @@ public class GameManager : MonoBehaviour
     IEnumerator StartRunning()
     {
         yield return new WaitForSeconds(2.5f);
-    
+
         play = true;
         playerRunControl = true;
         trajectoryOn = true;
         player.GetComponent<Animator>().SetInteger("Character Animator", 3);
-    
+
         if (otherPlayer1)
         {
             otherPlayer1.GetComponent<Animator>().SetInteger("Character Animator", 3);
         }
-    
+
         if (otherPlayer2)
         {
             otherPlayer2.GetComponent<Animator>().SetInteger("Character Animator", 3);
         }
+
+        startTimer.SetActive(false);
     }
 }

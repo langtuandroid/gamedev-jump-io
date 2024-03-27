@@ -10,7 +10,6 @@ public class JIWallCollider : MonoBehaviour
     private int _counter;
     [Inject] private AudioManager audioManager;
     [Inject] private GameManager gameManager;
-    [Inject] private TrajectoryManager trajectoryManager;
     private void OnTriggerEnter(Collider other)
     {
         if((other.gameObject.CompareTag("Player")) && _counter == 0)
@@ -18,8 +17,8 @@ public class JIWallCollider : MonoBehaviour
             if(!gameManager.fastSpeedOn)
             {
                 gameManager.CharacterFall();
-               trajectoryManager.PointsCounterReset();
-               trajectoryManager.lineRenderer.enabled = false;
+                TrajectoryManager.Instance.PointsCounterReset();
+                TrajectoryManager.Instance.lineRenderer.enabled = false;
                 audioManager.PlayMusic(AudioType.Fall);
                 StartCoroutine(PlayerNewPosition(other));
             }            

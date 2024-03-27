@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Zenject;
-public class TimerBoosterBehaviour : MonoBehaviour
+public class TimerBoosterBehaviour : MonoBehaviour// необходимо вынести из геймМенеджера и подключить этот скрипт
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image timerImg;
@@ -12,7 +12,7 @@ public class TimerBoosterBehaviour : MonoBehaviour
     [Inject] private GameManager gameManager;
     private void Start()
     {
-        gameManager.StartTimerEvent += (int duration) => StartTimer(duration);
+      //  gameManager.StartTimerEvent += (int duration) => StartTimer(duration);
     }
     public void StartTimer(int duration)
     {

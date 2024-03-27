@@ -9,13 +9,12 @@ public class PlayerBehaviour : MonoBehaviour
     public int playerNo;
 
     public bool playerFix;
-    
-    private int _characterIdleAnimation; 
+
+    private int _characterIdleAnimation;
     private float _playerZPos;
     private Animator _animator;
-    [Inject] private AudioManager audioManager;
     [Inject] private GameManager gameManager;
-    [Inject] private TrajectoryManager trajectoryManager;
+    [Inject] private AudioManager audioManager;
     private void Start()
     {
         speedChanger = moveSpeed;
@@ -23,18 +22,18 @@ public class PlayerBehaviour : MonoBehaviour
         _characterIdleAnimation = 1;//Random.Range(1, 3);
         _animator.SetInteger("Character Animator", _characterIdleAnimation);
     }
-    
+
     private void Update()
     {
-        if(gameManager.play && gameManager.playerRunControl)
+        if (gameManager.play && gameManager.playerRunControl)
         {
             transform.Translate(0, 0, 1 * moveSpeed * Time.deltaTime);
-        }        
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Finish"))
+        if (other.gameObject.CompareTag("Finish"))
         {
             int playerPosition = gameManager.playerPositionCounter;
 
@@ -49,13 +48,13 @@ public class PlayerBehaviour : MonoBehaviour
             gameManager.playerRunControl = false;
             gameManager.trajectoryOn = false;
             audioManager.PlayMusic(AudioType.Win);
-            trajectoryManager.lineRenderer.enabled = false;
+            TrajectoryManager.Instance.lineRenderer.enabled = false;
             gameManager.FireWorks();
             Instantiate(gameManager.finishEffect, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), gameManager.finishEffect.transform.rotation);
             gameObject.SetActive(false);
         }
 
-        if(other.gameObject.CompareTag("FastSpeed"))
+        if (other.gameObject.CompareTag("FastSpeed"))
         {
             moveSpeed = fastMoveSpeed;
             _animator.SetInteger("Character Animator", 7);
@@ -68,7 +67,7 @@ public class PlayerBehaviour : MonoBehaviour
             fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
 
-        if(other.gameObject.CompareTag("Long Jump"))
+        if (other.gameObject.CompareTag("Long Jump"))
         {
             gameManager.LongJumpOnFunction();
             audioManager.PlayMusic(AudioType.PowerPickUp);
@@ -78,7 +77,7 @@ public class PlayerBehaviour : MonoBehaviour
             fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
 
-        if(other.gameObject.CompareTag("Freeze"))
+        if (other.gameObject.CompareTag("Freeze"))
         {
             gameManager.FreezePlayers();
             gameManager.FreeeTimerOn();
@@ -91,21 +90,21 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("CrystalWall"))
+        if (other.gameObject.CompareTag("CrystalWall"))
         {
             other.gameObject.GetComponent<Animator>().SetBool("Destroy", true);
             gameManager.StoneHit();
             audioManager.PlayMusic(AudioType.Fall);
-           trajectoryManager.PointsCounterReset();
-           trajectoryManager.lineRenderer.enabled = false;
+            TrajectoryManager.Instance.PointsCounterReset();
+            TrajectoryManager.Instance.lineRenderer.enabled = false;
             Destroy(other.gameObject, 2);
         }
 
-        if(other.gameObject.CompareTag("WaterPlatform"))
+        if (other.gameObject.CompareTag("WaterPlatform"))
         {
             gameManager.CharacterFall();
-           trajectoryManager.PointsCounterReset();
-           trajectoryManager.lineRenderer.enabled = false;
+            TrajectoryManager.Instance.PointsCounterReset();
+            TrajectoryManager.Instance.lineRenderer.enabled = false;
             audioManager.PlayMusic(AudioType.Fall);
             _playerZPos = transform.position.z;
             StartCoroutine(PlayerNewPosition());
@@ -118,7 +117,7 @@ public class PlayerBehaviour : MonoBehaviour
         moveSpeed = speedChanger;
         _animator.SetInteger("Character Animator", 3);
         gameManager.trajectoryOn = true;
-       trajectoryManager.lineRenderer.enabled = true;
+        TrajectoryManager.Instance.lineRenderer.enabled = true;
     }
     private IEnumerator PlayerNewPosition()
     {

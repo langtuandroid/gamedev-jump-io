@@ -1326,7 +1326,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carMoveSpeed: 10
-  lineRenderer: {fileID: 595110518}
   objectToMove: {fileID: 723524220}
   startPoint: {fileID: 723524224}
   targetPosition: {fileID: 210608350}
@@ -1354,6 +1353,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
+  lineRenderer: {fileID: 595110518}
   rb: {fileID: 723524221}
   counterForGravity: 0
   inAction: 0
@@ -72918,6 +72918,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4739653708413304435, guid: 5ef3acccffcb57e4aadeccc1b8519e1a,
         type: 3}
+      propertyPath: smallTrajectory
+      value: 
+      objectReference: {fileID: 210608349}
+    - target: {fileID: 4739653708413304435, guid: 5ef3acccffcb57e4aadeccc1b8519e1a,
+        type: 3}
       propertyPath: trailEffectSpine
       value: 
       objectReference: {fileID: 1942797708}
@@ -72965,6 +72970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _isUseBoosterSpeedUp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739653708413304435, guid: 5ef3acccffcb57e4aadeccc1b8519e1a,
+        type: 3}
+      propertyPath: longJumpControlTimer
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4739653708413304435, guid: 5ef3acccffcb57e4aadeccc1b8519e1a,
         type: 3}

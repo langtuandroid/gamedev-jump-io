@@ -4,24 +4,19 @@ using UnityEngine;
 using Zenject;
 public class TrajectoryManager : MonoBehaviour
 {
-    [HideInInspector] public float carMoveSpeed { get { return GetCarMoveSpeed(); } }
-    [HideInInspector] public LineRenderer lineRenderer { get { return GetLineRender(); } }
+    public static TrajectoryManager Instance;
 
-    [SerializeField] private LineRenderer _lineRenderStandart;
-    [SerializeField] private LineRenderer _lineRenderLongJump;
-    [SerializeField] private float _carMoveSpeedStandart;
-    [SerializeField] private float _carMoveSpeedLongJump;
+    public float carMoveSpeed;
+    public GameObject objectToMove;
+    public Transform startPoint, targetPosition;
+    public bool done;
+    public float trajectoryMaxHeight;
+    public List<Vector3> points = new();
+    public LineRenderer lineRenderer;
+    public Rigidbody rb;
+    public int counterForGravity;
+    public bool inAction;
 
-    [SerializeField]private GameObject objectToMove;
-    [SerializeField] private Transform startPoint, targetPosition;
-    [SerializeField] private bool done;
-    [SerializeField] private float trajectoryMaxHeight;
-    [SerializeField] private List<Vector3> points = new();
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private int counterForGravity;
-    [SerializeField] private bool inAction;
-
-    public bool isUseStandartTrajectory=true;
     private Vector3 _startPosition, _endPosition;
     private bool _gotPoints;
     private int _count;
@@ -29,22 +24,13 @@ public class TrajectoryManager : MonoBehaviour
     private float _height;
     [Inject] private GameManager gameManager;
     [Inject] private AudioManager audioManager;
-    
+    private void Awake()
+    {
+        if (!Instance) Instance = this;
+    }
+
     private void Start() => lineRenderer.positionCount = points.Count;
-    private LineRenderer GetLineRender()
-    {
-        if (isUseStandartTrajectory)
-            return _lineRenderStandart;
-        else
-            return _lineRenderLongJump;
-    }
-    private float GetCarMoveSpeed()
-    {
-        if (isUseStandartTrajectory)
-            return _carMoveSpeedStandart;
-        else
-            return _carMoveSpeedLongJump;
-    }
+
     void Update()
     {
         if (gameManager.trajectoryOn)
@@ -78,7 +64,7 @@ public class TrajectoryManager : MonoBehaviour
                     lineRenderer.enabled = false;
                 }
                 _timer = 0;
-                if(counterForGravity > 0)
+                if (counterForGravity > 0)
                 {
                     rb.useGravity = false;
                 }
@@ -94,7 +80,7 @@ public class TrajectoryManager : MonoBehaviour
     void Trajectory()
     {
         OnDrawLine();
-        
+
         if (startPoint && targetPosition)
         {
             _startPosition = startPoint.position;
@@ -107,12 +93,12 @@ public class TrajectoryManager : MonoBehaviour
         }
 
         _gotPoints = true;
-        
+
     }
     void MoveTowards()
     {
         if (!_gotPoints) return;
-        
+
         float dis = Vector3.Distance(objectToMove.transform.position, points[_count]);
 
         if (dis <= 1)
@@ -129,7 +115,7 @@ public class TrajectoryManager : MonoBehaviour
                 return;
             }
 
-            if(_count == (points.Count - 6))
+            if (_count == (points.Count - 6))
             {
                 StartCoroutine(PlayCharacterLandAnimation());
             }
@@ -141,14 +127,14 @@ public class TrajectoryManager : MonoBehaviour
         }
         if (_count <= points.Count - 1)
         {
-            objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, points[_count], carMoveSpeed * Time.deltaTime);            
+            objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, points[_count], carMoveSpeed * Time.deltaTime);
         }
     }
 
     void OnDrawLine()
     {
         if (inAction) return;
-        
+
         Debug.DrawLine(_startPosition, _endPosition);
         float count = 20;
         points.Clear();
@@ -177,7 +163,7 @@ public class TrajectoryManager : MonoBehaviour
     {
         done = false;
         _count = 0;
-        inAction = false; 
+        inAction = false;
         rb.useGravity = true;
     }
 }
