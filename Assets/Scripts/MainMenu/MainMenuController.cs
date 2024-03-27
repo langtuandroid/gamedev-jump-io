@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 namespace UiControllers
 {
     public class MainMenuController : MonoBehaviour
@@ -13,8 +14,10 @@ namespace UiControllers
         [SerializeField] private Sprite _mainSprite;
         [SerializeField] private Sprite _secondSprite;
 
+        [Inject] private AudioManager audioManager;
         private void Start()
         {
+            audioManager.Start
             _backToMainMenuButton.SetActive(false);
             _levelsPanel.SetActive(false);
             _mainMenuPanel.SetActive(true);
