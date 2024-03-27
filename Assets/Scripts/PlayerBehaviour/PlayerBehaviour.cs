@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
-
-public class JIPlayerScript : MonoBehaviour
+using Zenject;
+public class PlayerBehaviour : MonoBehaviour
 {
     public int moveSpeed;
     public int fastMoveSpeed;
@@ -13,7 +13,9 @@ public class JIPlayerScript : MonoBehaviour
     private int _characterIdleAnimation; 
     private float _playerZPos;
     private Animator _animator;
-
+    [Inject] private AudioManager audioManager;
+    [Inject] private GameManager gameManager;
+    [Inject] private TrajectoryManager trajectoryManager;
     private void Start()
     {
         speedChanger = moveSpeed;
@@ -24,7 +26,7 @@ public class JIPlayerScript : MonoBehaviour
     
     private void Update()
     {
-        if(JIGameManager.Instance.play && JIGameManager.Instance.playerRunControl)
+        if(gameManager.play && gameManager.playerRunControl)
         {
             transform.Translate(0, 0, 1 * moveSpeed * Time.deltaTime);
         }        
@@ -34,22 +36,22 @@ public class JIPlayerScript : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Finish"))
         {
-            int playerPosition = JIGameManager.Instance.playerPositionCounter;
+            int playerPosition = gameManager.playerPositionCounter;
 
             if (playerPosition == 0 && !playerFix)
             {
-                JIGameManager.Instance.CalculateOtherPlayers();
+                gameManager.CalculateOtherPlayers();
             }
 
-            JIGameManager.Instance.CalculatePlayerPositions(playerNo, playerPosition);
-            JIGameManager.Instance.playerPositionCounter++;
-            JIGameManager.Instance.finish = true;
-            JIGameManager.Instance.playerRunControl = false;
-            JIGameManager.Instance.trajectoryOn = false;
-            JIGameManager.Instance.WinSFX();
-            JITrajectoryScript.Instance.lineRenderer.enabled = false;
-            JIGameManager.Instance.FireWorks();
-            Instantiate(JIGameManager.Instance.finishEffect, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), JIGameManager.Instance.finishEffect.transform.rotation);
+            gameManager.CalculatePlayerPositions(playerNo, playerPosition);
+            gameManager.playerPositionCounter++;
+            gameManager.finish = true;
+            gameManager.playerRunControl = false;
+            gameManager.trajectoryOn = false;
+            audioManager.PlayMusic(AudioType.Win);
+            trajectoryManager.lineRenderer.enabled = false;
+            gameManager.FireWorks();
+            Instantiate(gameManager.finishEffect, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), gameManager.finishEffect.transform.rotation);
             gameObject.SetActive(false);
         }
 
@@ -58,30 +60,30 @@ public class JIPlayerScript : MonoBehaviour
             moveSpeed = fastMoveSpeed;
             _animator.SetInteger("Character Animator", 7);
             StartCoroutine(ChangeToNormalSpeed());
-            JIGameManager.Instance.PowerPickUpSFX();
+            audioManager.PlayMusic(AudioType.PowerPickUp);
             Destroy(other.gameObject.transform.parent.gameObject);
-            JIGameManager.Instance.FastSpeedOnFunction();
-            GameObject fx = Instantiate(JIGameManager.Instance.tookJumpEffect, transform.position, JIGameManager.Instance.tookJumpEffect.transform.rotation);
+            gameManager.FastSpeedOnFunction();
+            GameObject fx = Instantiate(gameManager.tookJumpEffect, transform.position, gameManager.tookJumpEffect.transform.rotation);
             fx.transform.parent = gameObject.transform;
             fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
 
         if(other.gameObject.CompareTag("Long Jump"))
         {
-            JIGameManager.Instance.LongJumpOnFunction();
-            JIGameManager.Instance.PowerPickUpSFX();
+            gameManager.LongJumpOnFunction();
+            audioManager.PlayMusic(AudioType.PowerPickUp);
             Destroy(other.gameObject.transform.parent.gameObject);
-            GameObject fx = Instantiate(JIGameManager.Instance.tooklongJumpEffect, transform.position, JIGameManager.Instance.tooklongJumpEffect.transform.rotation);
+            GameObject fx = Instantiate(gameManager.tooklongJumpEffect, transform.position, gameManager.tooklongJumpEffect.transform.rotation);
             fx.transform.parent = gameObject.transform;
             fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
 
         if(other.gameObject.CompareTag("Freeze"))
         {
-            JIGameManager.Instance.FreezePlayers();
-            JIGameManager.Instance.FreeeTimerOn();
+            gameManager.FreezePlayers();
+            gameManager.FreeeTimerOn();
             Destroy(other.gameObject.transform.parent.gameObject);
-            GameObject fx = Instantiate(JIGameManager.Instance.tookFreezeEffect, transform.position, JIGameManager.Instance.tookFreezeEffect.transform.rotation);
+            GameObject fx = Instantiate(gameManager.tookFreezeEffect, transform.position, gameManager.tookFreezeEffect.transform.rotation);
             fx.transform.parent = gameObject.transform;
             fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
@@ -92,19 +94,19 @@ public class JIPlayerScript : MonoBehaviour
         if(other.gameObject.CompareTag("CrystalWall"))
         {
             other.gameObject.GetComponent<Animator>().SetBool("Destroy", true);
-            JIGameManager.Instance.StoneHit();
-            JIGameManager.Instance.FallSFX();
-            JITrajectoryScript.Instance.PointsCounterReset();
-            JITrajectoryScript.Instance.lineRenderer.enabled = false;
+            gameManager.StoneHit();
+            audioManager.PlayMusic(AudioType.Fall);
+           trajectoryManager.PointsCounterReset();
+           trajectoryManager.lineRenderer.enabled = false;
             Destroy(other.gameObject, 2);
         }
 
         if(other.gameObject.CompareTag("WaterPlatform"))
         {
-            JIGameManager.Instance.CharacterFall();
-            JITrajectoryScript.Instance.PointsCounterReset();
-            JITrajectoryScript.Instance.lineRenderer.enabled = false;
-            JIGameManager.Instance.FallSFX();
+            gameManager.CharacterFall();
+           trajectoryManager.PointsCounterReset();
+           trajectoryManager.lineRenderer.enabled = false;
+            audioManager.PlayMusic(AudioType.Fall);
             _playerZPos = transform.position.z;
             StartCoroutine(PlayerNewPosition());
         }
@@ -115,8 +117,8 @@ public class JIPlayerScript : MonoBehaviour
         yield return new WaitForSeconds(5);
         moveSpeed = speedChanger;
         _animator.SetInteger("Character Animator", 3);
-        JIGameManager.Instance.trajectoryOn = true;
-        JITrajectoryScript.Instance.lineRenderer.enabled = true;
+        gameManager.trajectoryOn = true;
+       trajectoryManager.lineRenderer.enabled = true;
     }
     private IEnumerator PlayerNewPosition()
     {

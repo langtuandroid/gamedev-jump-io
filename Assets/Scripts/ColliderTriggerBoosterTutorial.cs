@@ -7,20 +7,21 @@ public enum BoosterType
     JumpUp,
     SpeedUp
 }
-public class JITutorialScript : MonoBehaviour
+public class ColliderTriggerBoosterTutorial : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialPanel;
     [Inject] private IPopupManager _popupManager;
+    [Inject] private GameManager gameManager;
     private BoosterType currentBoosterType;
     private void Start()
     {
-        if (JIGameManager.Instance.IsUseBoosterFreezeAll)
+        if (gameManager.IsUseBoosterFreezeAll)
             currentBoosterType = BoosterType.FreezeAll;
         else
-        if (JIGameManager.Instance.IsUseBoosterJumpUp)
+        if (gameManager.IsUseBoosterJumpUp)
             currentBoosterType = BoosterType.JumpUp;
         else
-            if(JIGameManager.Instance.IsUseBoosterSpeedUp)
+            if(gameManager.IsUseBoosterSpeedUp)
             currentBoosterType = BoosterType.SpeedUp;
         else
             currentBoosterType = BoosterType.None;

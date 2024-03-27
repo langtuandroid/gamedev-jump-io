@@ -173,9 +173,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a47ca26c8274a46b9b9b7ddd8763c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: {fileID: 0}
-  powerPickUp: {fileID: 0}
-  fall: {fileID: 0}
-  win: {fileID: 0}
-  stage: {fileID: 0}
+  audioDataList:
+  - {fileID: 11400000, guid: fe0f1352240968c4aa409d481b55d6aa, type: 2}
+  - {fileID: 11400000, guid: 22b259cc00dbf674d910011a8fc14e00, type: 2}
+  - {fileID: 11400000, guid: ac59d9c1dcb4bd54eab686be0cf365f8, type: 2}
+  - {fileID: 11400000, guid: 2309473fcc376a144a9412537675d1f2, type: 2}
+  - {fileID: 11400000, guid: ddb0388be3ff45343ba85b2d6a853d06, type: 2}
+  - {fileID: 11400000, guid: da62b46fb4b22564ca8d4c864deee9cc, type: 2}
   _audioSource: {fileID: 4866608240382066915}

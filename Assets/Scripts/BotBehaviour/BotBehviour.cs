@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
-
-public class JIOtherPlayerScript : MonoBehaviour
+using Zenject;
+public class BotBehviour : MonoBehaviour
 {
     public int moveSpeed;
     public int playerNo;
@@ -12,6 +12,8 @@ public class JIOtherPlayerScript : MonoBehaviour
     private Rigidbody _rb;
     private bool _run;
     private Vector3 _playerPos;
+
+    [Inject] private GameManager gameManager;
 
     private void Start()
     {
@@ -25,7 +27,7 @@ public class JIOtherPlayerScript : MonoBehaviour
 
     private void Update()
     {
-        if (JIGameManager.Instance.play && _run && !JIGameManager.Instance.otherPlayerFreeze)
+        if (gameManager.play && _run && !gameManager.otherPlayerFreeze)
         {
             transform.Translate(0, 0, _changedMoveSpeed * Time.deltaTime);
         }
@@ -35,12 +37,12 @@ public class JIOtherPlayerScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Finish"))
         {
-            if (!JIGameManager.Instance.finish) JIGameManager.Instance.finishedPlayers++;
-            int playerPosition = JIGameManager.Instance.playerPositionCounter;
-            if(!JIGameManager.Instance.calculated)
+            if (!gameManager.finish) gameManager.finishedPlayers++;
+            int playerPosition = gameManager.playerPositionCounter;
+            if(!gameManager.calculated)
             {
-                JIGameManager.Instance.CalculatePlayerPositions(playerNo, playerPosition);
-                JIGameManager.Instance.playerPositionCounter++;
+                gameManager.CalculatePlayerPositions(playerNo, playerPosition);
+                gameManager.playerPositionCounter++;
             }
             gameObject.SetActive(false);
         }
@@ -81,7 +83,7 @@ public class JIOtherPlayerScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     { 
-        if(other.gameObject.CompareTag("Platform") && JIGameManager.Instance.play)
+        if(other.gameObject.CompareTag("Platform") && gameManager.play)
         {
             _animator.SetInteger("Character Animator", 3);
             _changedMoveSpeed = moveSpeed;

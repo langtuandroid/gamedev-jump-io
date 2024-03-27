@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
-public class JIGameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public Action<int> ON_LEVEL_COMPLETED_ACTION;
 
-    public static JIGameManager Instance;
 
     public bool play;
     public bool playerRunControl;
@@ -42,13 +42,7 @@ public class JIGameManager : MonoBehaviour
     public GameObject otherPlayer1;
     public GameObject otherPlayer2;
 
-    [Header("UI elements")]
-    public Image timeImage;
-    public TextMeshProUGUI timeText;
-    public int integerTimer;
-    public GameObject timer;
-    public GameObject startTimer;
-
+  
     [Header("Particle effects")]
     public GameObject jumpEffect;
     public GameObject finishEffect;
@@ -80,39 +74,31 @@ public class JIGameManager : MonoBehaviour
 
     public GameObject levelCompletePanel;
 
-    [Header("All Sounds")]
-    public AudioClip jump;
-    public AudioClip powerPickUp;
-    public AudioClip fall;
-    public AudioClip win;
-    public AudioClip stage;
-    private AudioSource _audioSource;
+   
     public int finishedPlayers;
-    [Inject] private IPopupManager _popupsManager;
+    [Inject] private IPopupManager popupsManager;
+    [Inject] private TrajectoryManager trajectoryManager;
+    public event UnityAction<int> StartTimerEvent;
 
 
-  
     private void Awake()
     {
-        Instance = this;
         finishedPlayers = 0;
-        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        _popupsManager.ShowPopup(PopupType.StartLevelPopup);
+        popupsManager.ShowPopup(PopupType.StartLevelPopup);
     }
 
     private void Update()
     {
         if(Input.GetMouseButtonUp(0) && !play)
         {
-            //startTimer.SetActive(true);
             StartCoroutine(StartRunning());
         }
 
-        if(fastSpeedOn)
+       /* if(fastSpeedOn)
         {
             tempTime -= Time.deltaTime;
             timeImage.fillAmount = tempTime / time;
@@ -122,7 +108,7 @@ public class JIGameManager : MonoBehaviour
             {
                 timer.SetActive(false);
             }
-        }
+        }*/
     }
 
     public void CharacterJump()
@@ -192,9 +178,11 @@ public class JIGameManager : MonoBehaviour
 
     public void FastSpeedOnFunction()
     {
-        fastSpeedOn = true;
-        timer.SetActive(true);
-        JITrajectoryScript.Instance.carMoveSpeed = 15;
+      /*  fastSpeedOn = true;
+        timer.SetActive(true);*/
+        StartTimerEvent?.Invoke(5);
+
+       trajectoryManager.carMoveSpeed = 15;
         trailEffectSpine.SetActive(true);
         trailEffectLeftHand.SetActive(true);
         trailEffectRighttHand.SetActive(true);
@@ -202,58 +190,25 @@ public class JIGameManager : MonoBehaviour
         StartCoroutine(SpeedControler());
     }
 
-    public void WinSFX()
-    {
-        if (PlayerPrefs.GetInt("Audio", 0) == 0) _audioSource.PlayOneShot(win);
-    }
-
-    public void PowerPickUpSFX()
-    {
-        if (PlayerPrefs.GetInt("Audio", 0) == 0) _audioSource.PlayOneShot(powerPickUp);
-    }
-
-    public void JumpSFX()
-    {
-        if (PlayerPrefs.GetInt("Audio", 0) == 0) _audioSource.PlayOneShot(jump);
-    }
-
-    public void FallSFX()
-    {
-        if (PlayerPrefs.GetInt("Audio", 0) == 0) _audioSource.PlayOneShot(fall);
-    }
-
-    public void StageSFX()
-    {
-        if (PlayerPrefs.GetInt("Audio", 0) == 0) _audioSource.PlayOneShot(stage);
-    }
 
     private void FastSpeedOffFunction()
     {
-        fastSpeedOn = false;
-        JITrajectoryScript.Instance.carMoveSpeed = 10;
-        JITrajectoryScript.Instance.lineRenderer.enabled = false;
+       trajectoryManager.carMoveSpeed = 10;
+       trajectoryManager.lineRenderer.enabled = false;
         trailEffectSpine.SetActive(false);
         trailEffectLeftHand.SetActive(false);
         trailEffectRighttHand.SetActive(false);
-        timer.SetActive(false);
-        tempTime = time;
     }
 
     public void LongJumpOnFunction()
     {
-        time = 3;
-        tempTime = 3;
-        timer.SetActive(true);
-        fastSpeedOn = true;
+        StartTimerEvent?.Invoke(3);
         StartCoroutine(LongJumpControlFunction());
     }
 
     public void FreeeTimerOn()
     {
-        time = 3;
-        tempTime = 3;
-        timer.SetActive(true);
-        fastSpeedOn = true;
+        StartTimerEvent?.Invoke(3);
         StartCoroutine(FreeTimerControl());
     }
 
@@ -264,8 +219,8 @@ public class JIGameManager : MonoBehaviour
 
     private void LongJumpOffFunction()
     {
-        longTrajectory.GetComponent<JITrajectoryScript>().lineRenderer.enabled = false;
-        smallTrajectory.GetComponent<JITrajectoryScript>().PointsCounterReset();
+        longTrajectory.GetComponent<TrajectoryManager>().lineRenderer.enabled = false;
+        smallTrajectory.GetComponent<TrajectoryManager>().PointsCounterReset();
         longTrajectory.SetActive(false);
         smallTrajectory.SetActive(true);
         fastSpeedOn = false;
@@ -324,10 +279,12 @@ public class JIGameManager : MonoBehaviour
         yield return new WaitForSeconds(longJumpControlTimer);
         playerRunControl = true;
         player.GetComponent<Animator>().SetInteger("Character Animator", 3);
-        smallTrajectory.GetComponent<JITrajectoryScript>().lineRenderer.enabled = false;
-        smallTrajectory.GetComponent<JITrajectoryScript>().PointsCounterReset();
+        smallTrajectory.GetComponent<TrajectoryManager>().lineRenderer.enabled = false;
+        smallTrajectory.GetComponent<TrajectoryManager>().PointsCounterReset();
         smallTrajectory.SetActive(false);
         longTrajectory.SetActive(true);
+
+        trajectoryManager.isUseStandartTrajectory = false;
 
         yield return new WaitForSeconds(3f);
         LongJumpOffFunction();
@@ -372,7 +329,5 @@ public class JIGameManager : MonoBehaviour
         {
             otherPlayer2.GetComponent<Animator>().SetInteger("Character Animator", 3);
         }
-
-        startTimer.SetActive(false);
     }
 }

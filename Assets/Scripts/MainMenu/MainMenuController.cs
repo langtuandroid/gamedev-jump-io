@@ -17,7 +17,7 @@ namespace UiControllers
         [Inject] private AudioManager audioManager;
         private void Start()
         {
-            audioManager.Start
+            audioManager.PlayMusic(MusicType.BackGround);
             _backToMainMenuButton.SetActive(false);
             _levelsPanel.SetActive(false);
             _mainMenuPanel.SetActive(true);
@@ -25,7 +25,11 @@ namespace UiControllers
                 _soundIconImage.color = new Color(0.5f, 0.5f, 0.5f);
             else
                 _soundIconImage.color = new Color(1, 1, 1);
-            JIBackgroundMusic.Instance.gameObject.SetActive(PlayerPrefs.GetInt("Audio", 0) == 0);
+
+            if (PlayerPrefs.GetInt("Audio", 0) == 0)
+                audioManager.MusicOn();
+            else
+                audioManager.MusicOff();
         }
 
         public void SettingsButton()
@@ -44,7 +48,10 @@ namespace UiControllers
                 _soundIconImage.color = new Color(0.5f, 0.5f, 0.5f);
             else
                 _soundIconImage.color = new Color(1, 1, 1);
-            JIBackgroundMusic.Instance.gameObject.SetActive(PlayerPrefs.GetInt("Audio", 0) == 0);
+            if (PlayerPrefs.GetInt("Audio", 0) == 0)
+                audioManager.MusicOn();
+            else
+                audioManager.MusicOff();
         }
         public void PlayButton()
         {

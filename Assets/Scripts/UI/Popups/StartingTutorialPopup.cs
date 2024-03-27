@@ -17,10 +17,10 @@ public class StartingTutorialPopup : BasePopup
     [SerializeField] private Sprite _jumpUpSprite;
     [SerializeField] private Sprite _speedUpSprite;
 
-    [Inject] private IPopupManager _popupsManager;
+    [Inject] private IPopupManager popupsManager;
     private void Start()
     {
-        skipBtn.onClick.AddListener(()=> { _popupsManager.HideCurrentPopup(); Time.timeScale = 1; });
+        skipBtn.onClick.AddListener(()=> { popupsManager.HideCurrentPopup(); Time.timeScale = 1; });
     }
     public override void AfterShow(string json)
     {

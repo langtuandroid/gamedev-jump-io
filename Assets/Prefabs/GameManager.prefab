@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4739653708413304432}
   - component: {fileID: 4739653708413304435}
-  - component: {fileID: 5356749035563344001}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -25,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4739653708413304434}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7396145, y: -3.5575118, z: 6.413964}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4739653708413304435
 MonoBehaviour:
@@ -50,6 +50,9 @@ MonoBehaviour:
   player: {fileID: 0}
   finish: 0
   fastSpeedOn: 0
+  _isUseBoosterJumpUp: 0
+  _isUseBoosterFreezeAll: 0
+  _isUseBoosterSpeedUp: 0
   blast:
   - {fileID: 0}
   - {fileID: 0}
@@ -72,11 +75,13 @@ MonoBehaviour:
   timeText: {fileID: 0}
   integerTimer: 0
   timer: {fileID: 0}
+  startTimer: {fileID: 0}
   jumpEffect: {fileID: 0}
-  jumpPowerEffect: {fileID: 0}
-  longJumpPowerEffect: {fileID: 0}
+  finishEffect: {fileID: 0}
+  freezEffect: {fileID: 0}
   tookJumpEffect: {fileID: 0}
   tooklongJumpEffect: {fileID: 0}
+  tookFreezeEffect: {fileID: 0}
   trailEffectSpine: {fileID: 0}
   trailEffectLeftHand: {fileID: 0}
   trailEffectRighttHand: {fileID: 0}
@@ -85,107 +90,8 @@ MonoBehaviour:
   longJumpControlTimer: 0
   calculated: 0
   gotPower: 0
+  otherPlayerFreeze: 0
   time: 5
   tempTime: 5
   levelCompletePanel: {fileID: 0}
-  jump: {fileID: 8300000, guid: 8a192c9a981d02941b86a05715ceaa9b, type: 3}
-  powerPickUp: {fileID: 8300000, guid: c8863e2f917be4a4cbc33e6d7de4eaee, type: 3}
-  fall: {fileID: 8300000, guid: 119ed0d48c7dbc14ba33153087753637, type: 3}
-  win: {fileID: 8300000, guid: ca117a3a412f23d49aed26826bdafa7c, type: 3}
-  stage: {fileID: 8300000, guid: 264908b9af4e96644924e52167cc8316, type: 3}
---- !u!82 &5356749035563344001
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4739653708413304434}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.6
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  finishedPlayers: 0

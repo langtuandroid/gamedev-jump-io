@@ -1,40 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class JITrajectoryScript : MonoBehaviour
+using Zenject;
+public class TrajectoryManager : MonoBehaviour
 {
-    public static JITrajectoryScript Instance;
+    [HideInInspector] public float carMoveSpeed { get { return GetCarMoveSpeed(); } }
+    [HideInInspector] public LineRenderer lineRenderer { get { return GetLineRender(); } }
 
-    public GameObject objectToMove;
-    public Transform startPoint, targetPosition;
-    public bool done;
-    public float trajectoryMaxHeight;
-    public List<Vector3> points = new();
-    public LineRenderer lineRenderer;
-    public float carMoveSpeed;
-    public Rigidbody rb;
-    public int counterForGravity;
-    public bool inAction;
-    
+    [SerializeField] private LineRenderer _lineRenderStandart;
+    [SerializeField] private LineRenderer _lineRenderLongJump;
+    [SerializeField] private float _carMoveSpeedStandart;
+    [SerializeField] private float _carMoveSpeedLongJump;
+
+    [SerializeField]private GameObject objectToMove;
+    [SerializeField] private Transform startPoint, targetPosition;
+    [SerializeField] private bool done;
+    [SerializeField] private float trajectoryMaxHeight;
+    [SerializeField] private List<Vector3> points = new();
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private int counterForGravity;
+    [SerializeField] private bool inAction;
+
+    public bool isUseStandartTrajectory=true;
     private Vector3 _startPosition, _endPosition;
     private bool _gotPoints;
     private int _count;
     private float _timer;
     private float _height;
-    
-    private void Awake()
-    {
-        if (!Instance) Instance = this;
-    }
+    [Inject] private GameManager gameManager;
+    [Inject] private AudioManager audioManager;
     
     private void Start() => lineRenderer.positionCount = points.Count;
-
+    private LineRenderer GetLineRender()
+    {
+        if (isUseStandartTrajectory)
+            return _lineRenderStandart;
+        else
+            return _lineRenderLongJump;
+    }
+    private float GetCarMoveSpeed()
+    {
+        if (isUseStandartTrajectory)
+            return _carMoveSpeedStandart;
+        else
+            return _carMoveSpeedLongJump;
+    }
     void Update()
     {
-        if (JIGameManager.Instance.trajectoryOn)
+        if (gameManager.trajectoryOn)
         {
-            if (Input.GetMouseButton(0) && JIGameManager.Instance.playerRunControl)
+            if (Input.GetMouseButton(0) && gameManager.playerRunControl)
             {
                 _timer += Time.deltaTime;
 
@@ -53,10 +68,10 @@ public class JITrajectoryScript : MonoBehaviour
                     done = true;
                     lineRenderer.enabled = false;
                     rb.useGravity = false;
-                    JIGameManager.Instance.playerRunControl = false;
-                    JIGameManager.Instance.CharacterJump();
-                    JIGameManager.Instance.JumpSFX();
-                    Instantiate(JIGameManager.Instance.jumpEffect, rb.position, JIGameManager.Instance.jumpEffect.transform.rotation);
+                    gameManager.playerRunControl = false;
+                    gameManager.CharacterJump();
+                    audioManager.PlayMusic(AudioType.Jump);
+                    Instantiate(gameManager.jumpEffect, rb.position, gameManager.jumpEffect.transform.rotation);
                 }
                 else
                 {
@@ -110,7 +125,7 @@ public class JITrajectoryScript : MonoBehaviour
             if (_count == points.Count)
             {
                 PointsCounterReset();
-                JIGameManager.Instance.playerRunControl = true;
+                gameManager.playerRunControl = true;
                 return;
             }
 
@@ -155,7 +170,7 @@ public class JITrajectoryScript : MonoBehaviour
     private IEnumerator PlayCharacterLandAnimation()
     {
         yield return new WaitForSeconds(0.4f);
-        JIGameManager.Instance.CharacterLand();
+        gameManager.CharacterLand();
     }
 
     public void PointsCounterReset()

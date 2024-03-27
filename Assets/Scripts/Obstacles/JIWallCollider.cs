@@ -1,24 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Zenject;
 public class JIWallCollider : MonoBehaviour
 {
     public List<GameObject> blocks;
 
     private float _playerZPos;
     private int _counter;
-    
+    [Inject] private AudioManager audioManager;
+    [Inject] private GameManager gameManager;
+    [Inject] private TrajectoryManager trajectoryManager;
     private void OnTriggerEnter(Collider other)
     {
         if((other.gameObject.CompareTag("Player")) && _counter == 0)
         {
-            if(!JIGameManager.Instance.fastSpeedOn)
+            if(!gameManager.fastSpeedOn)
             {
-                JIGameManager.Instance.CharacterFall();
-                JITrajectoryScript.Instance.PointsCounterReset();
-                JITrajectoryScript.Instance.lineRenderer.enabled = false;
-                JIGameManager.Instance.FallSFX();
+                gameManager.CharacterFall();
+               trajectoryManager.PointsCounterReset();
+               trajectoryManager.lineRenderer.enabled = false;
+                audioManager.PlayMusic(AudioType.Fall);
                 StartCoroutine(PlayerNewPosition(other));
             }            
             _counter++;            

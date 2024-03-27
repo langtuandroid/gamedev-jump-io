@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class JIPlayerFollow : MonoBehaviour
+using Zenject;
+public class CameraTracker : MonoBehaviour
 {
     public Transform player;
     public Transform finishPosition;
@@ -10,7 +11,8 @@ public class JIPlayerFollow : MonoBehaviour
     private int _screenWidth;
     private float _cameraZPosition;
     private bool _coroutineStarted = false;
-
+    [Inject] private GameManager gameManager;
+    [Inject] private AudioManager audioManager;
     private void Awake()
     {
         _screenHeight = Screen.height;
@@ -29,12 +31,12 @@ public class JIPlayerFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(!JIGameManager.Instance.finish)
+        if(!gameManager.finish)
         {
             _cameraZPosition = player.position.z - 8.59f;
             transform.position = new Vector3(transform.position.x, transform.position.y, _cameraZPosition);
         }
-        else if(JIGameManager.Instance.finish)
+        else if(gameManager.finish)
         {
             StartCoroutine(FinishDelay());
         }        
@@ -43,8 +45,8 @@ public class JIPlayerFollow : MonoBehaviour
     IEnumerator FinishDelay()
     {
         yield return new WaitForSeconds(1f);
-        JIGameManager.Instance.SlidersOff();
-        JIGameManager.Instance.StageSFX();
+        gameManager.SlidersOff();
+        audioManager.PlayMusic(AudioType.Stage);
         transform.position = Vector3.Lerp(transform.position, finishPosition.position, 3 * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 3 * Time.deltaTime);
 
@@ -52,7 +54,7 @@ public class JIPlayerFollow : MonoBehaviour
         {
             _coroutineStarted = true;
             yield return new WaitForSeconds(2);
-            JIGameManager.Instance.LevelCompletePanelOn();
+            gameManager.LevelCompletePanelOn();
         }
     }
 }
