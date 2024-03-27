@@ -9,7 +9,6 @@ namespace UiControllers
         [SerializeField] private GameObject _levelsPanel;
         [SerializeField] private GameObject _settingPanel;
         [SerializeField] private Image _soundIconImage;
-        [SerializeField] private GameObject _gameNameText;
         [SerializeField] private Image _backgroundImage;
         [SerializeField] private Sprite _mainSprite;
         [SerializeField] private Sprite _secondSprite;
@@ -32,7 +31,6 @@ namespace UiControllers
             _backToMainMenuButton.SetActive(true);
             _mainMenuPanel.SetActive(false);
             _settingPanel.SetActive(true);
-            _gameNameText.SetActive(false);
         }
 
         public void AudioButton()
@@ -51,7 +49,6 @@ namespace UiControllers
             _backToMainMenuButton.SetActive(true);
             _levelsPanel.SetActive(true);
             _mainMenuPanel.SetActive(false);
-            _gameNameText.SetActive(false);
         }
 
         public void BackToMainMenuButton()
@@ -61,12 +58,6 @@ namespace UiControllers
             _backToMainMenuButton.SetActive(false);
             _levelsPanel.SetActive(false);
             _mainMenuPanel.SetActive(true);
-            _gameNameText.SetActive(true);
-        }
-
-        public void ExitButton()
-        {
-            Application.Quit();
         }
     }
 }
