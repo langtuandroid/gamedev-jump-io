@@ -20,12 +20,12 @@ public class StartingTutorialPopup : BasePopup
     [Inject] private IPopupManager popupsManager;
     private void Start()
     {
-        skipBtn.onClick.AddListener(()=> { popupsManager.HideCurrentPopup(); Time.timeScale = 1; });
+        skipBtn.onClick.AddListener(() => { popupsManager.HideCurrentPopup(); Time.timeScale = 1; });
     }
     public override void AfterShow(string json)
     {
         BoosterType currentBoosterType = JsonUtility.FromJson<BoosterType>(json);
-        if(currentBoosterType == BoosterType.None)
+        if (currentBoosterType == BoosterType.None)
         {
             _tutorialBottomText.text = "Tap and hold to aim and release to jump.";
             _boosterImg.gameObject.SetActive(false);
@@ -33,7 +33,7 @@ public class StartingTutorialPopup : BasePopup
         }
         else
         {
-            if(currentBoosterType == BoosterType.JumpUp)
+            if (currentBoosterType == BoosterType.JumpUp)
             {
                 _tutorialBottomText.text = "Tap To Continue";
                 _boosterImg.sprite = _jumpUpSprite;
@@ -45,7 +45,7 @@ public class StartingTutorialPopup : BasePopup
                 _boosterImg.sprite = _freezSprite;
                 _tutorialUpText.text = "This is freeze power up, take it to freeze your opponents, active for 3 sec";
             }
-            if(currentBoosterType== BoosterType.SpeedUp)
+            if (currentBoosterType == BoosterType.SpeedUp)
             {
                 _tutorialBottomText.text = "Tap To Continue";
                 _boosterImg.sprite = _speedUpSprite;

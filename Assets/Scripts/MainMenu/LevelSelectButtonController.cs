@@ -13,7 +13,8 @@ public class LevelSelectButtonController : MonoBehaviour
     public void Initialize(int levelIndex)
     {
         _levelIndex = levelIndex;
-        var isUnlocked = _levelIndex <= PlayerPrefs.GetInt("Level No.", 1);
+        //var isUnlocked = _levelIndex <= PlayerPrefs.GetInt("Level No.", 1);
+        var isUnlocked = true;//for testing
         _lockImage.enabled = !isUnlocked;
         _thisButton.interactable = isUnlocked;
         if (isUnlocked)
