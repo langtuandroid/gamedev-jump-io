@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: GUC
-  productName: JumpIo
+  productName: Bendy run
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -284,7 +284,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: ecdd16f4cbe86a9479f1ffaf174e6285, type: 3}
+      m_Icon: {fileID: 2800000, guid: 6c849f2d70e6bcc49b578e3c9dc47c8d, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -351,32 +351,38 @@ PlayerSettings:
       m_Height: 36
       m_Kind: 0
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 6c849f2d70e6bcc49b578e3c9dc47c8d, type: 3}
       m_Width: 192
       m_Height: 192
       m_Kind: 1
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 280ce9619f4664946a2f4afb431ee65e, type: 3}
       m_Width: 144
       m_Height: 144
       m_Kind: 1
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 0b8e3ea9ef6b58947ac93be0d8bb9f5d, type: 3}
       m_Width: 96
       m_Height: 96
       m_Kind: 1
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 07a148ef3bb54fe4e83c0b216eaa9d84, type: 3}
       m_Width: 72
       m_Height: 72
       m_Kind: 1
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 93e9a67f9159e6c4daf87e646c8c3f01, type: 3}
       m_Width: 48
       m_Height: 48
       m_Kind: 1
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 28a9e2e8cd9885f4f9e64b489e8e057e, type: 3}
       m_Width: 36
       m_Height: 36
       m_Kind: 1

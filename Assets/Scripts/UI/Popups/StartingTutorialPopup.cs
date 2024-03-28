@@ -27,9 +27,9 @@ public class StartingTutorialPopup : BasePopup
         BoosterType currentBoosterType = JsonUtility.FromJson<BoosterType>(json);
         if (currentBoosterType == BoosterType.None)
         {
-            _tutorialBottomText.text = "Tap and hold to aim and release to jump.";
+            _tutorialBottomText.gameObject.SetActive(false);
+            _tutorialUpText.text = "Tap and hold to aim and release to jump";
             _boosterImg.gameObject.SetActive(false);
-            _tutorialUpText.gameObject.SetActive(false);
         }
         else
         {

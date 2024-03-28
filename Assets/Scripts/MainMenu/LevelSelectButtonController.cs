@@ -6,15 +6,14 @@ using UnityEngine.UI;
 public class LevelSelectButtonController : MonoBehaviour
 {
     [SerializeField] private Button _thisButton;
-    [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private Text _levelText;
     [SerializeField] private Image _lockImage;
     private int _levelIndex;
     
     public void Initialize(int levelIndex)
     {
         _levelIndex = levelIndex;
-        //var isUnlocked = _levelIndex <= PlayerPrefs.GetInt("Level No.", 1);
-        var isUnlocked = true;//for testing
+        var isUnlocked = _levelIndex <= PlayerPrefs.GetInt("Level No.", 1);
         _lockImage.enabled = !isUnlocked;
         _thisButton.interactable = isUnlocked;
         if (isUnlocked)

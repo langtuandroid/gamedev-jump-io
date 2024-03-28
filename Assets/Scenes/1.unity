@@ -618,6 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98976018bfe96e4eb1b039ea8bcffa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carMoveSpeed: 9
   objectToMove: {fileID: 723524220}
   startPoint: {fileID: 723524224}
   targetPosition: {fileID: 210608350}
@@ -646,7 +647,6 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   lineRenderer: {fileID: 595110518}
-  carMoveSpeed: 9
   rb: {fileID: 723524221}
   counterForGravity: 0
   inAction: 0
@@ -13147,7 +13147,7 @@ PrefabInstance:
     - target: {fileID: 7864692534123978712, guid: a2201ffb3014d3d4a95b1ef40abc423c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 552.52
+      value: 950
       objectReference: {fileID: 0}
     - target: {fileID: 7864692534329995830, guid: a2201ffb3014d3d4a95b1ef40abc423c,
         type: 3}
