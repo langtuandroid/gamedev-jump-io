@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Zenject;
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI levelNoText;
+    [SerializeField] private Text levelNoText;
 
     [Space]
     [Header("For Player")]

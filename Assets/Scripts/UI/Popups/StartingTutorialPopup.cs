@@ -8,9 +8,9 @@ using System;
 
 public class StartingTutorialPopup : BasePopup
 {
-    [SerializeField] private TMP_Text _tutorialBottomText;
+    [SerializeField] private Text _tutorialBottomText;
     [SerializeField] private Image _boosterImg;
-    [SerializeField] private TMP_Text _tutorialUpText;
+    [SerializeField] private Text _tutorialUpText;
     [SerializeField] private Button skipBtn;
 
     [SerializeField] private Sprite _freezSprite;
