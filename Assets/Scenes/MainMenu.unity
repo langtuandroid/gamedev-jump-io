@@ -1291,9 +1291,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Bendy
+  m_Text: 'Bounce
 
-    run'
+    guys'
 --- !u!1 &981502844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,8 +2927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d23a9d255dc484eb6fa58ddcf84478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _urlForPrivacyPolicy: https://docs.google.com/document/d/1r0fe3GWsXTe5tCaQ-LnZaKMlVnLYe2i9/edit#heading=h.gjdgxs
-  _urlForTermsOfUse: https://docs.google.com/document/d/1VEm8RMz5Qf7MG2Lk5zizZjv0SKr3n3GI/edit#heading=h.gjdgxs
+  _urlForPrivacyPolicy: https://docs.google.com/document/d/10DYtebJuQGPthDfr6690EV72wANlvd1s/edit#heading=h.gjdgxs
+  _urlForTermsOfUse: https://docs.google.com/document/d/12gdUFMesLQa7ln27Wb6BB6B0oc25dSkE/edit#heading=h.gjdgxs
   _privacyButton: {fileID: 1985519090}
   _termsButton: {fileID: 2072184755}
 --- !u!1660057539 &9223372036854775807
