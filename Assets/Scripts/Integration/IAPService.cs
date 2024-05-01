@@ -116,15 +116,15 @@ namespace Integration
                 }
                 PlayerPrefs.SetInt(_adMobController.noAdsKey, subscriptionActive ? 1 : 0);
                 PlayerPrefs.Save();
-                
-                if (subscriptionActive)
+
+              /*  if (subscriptionActive)
                 {
                     HideSubscriptionPanel();
                 }
                 else
                 {
                     ShowSubscriptionPanel();
-                }
+                }*/
             }
         }
 

@@ -50,6 +50,7 @@ namespace Integration
 			_interstitialAdController.InterstitialId = IsProdaction ? _settings.InterstitialID : _settings.InterstitialTestID;
 			_rewardedAdController.RewardedId = IsProdaction ? _settings.RewardedID : _settings.RewardedTestID;
 			LoadAllAds();
+			ShowBanner(true);
 		}
 
 		private void LoadAllAds()
