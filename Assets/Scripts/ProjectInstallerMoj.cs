@@ -1,6 +1,6 @@
 using UnityEngine;
 using Zenject;
-public class ProjectInstaller : MonoInstaller
+public class ProjectInstallerMoj : MonoInstaller
 {
    // [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject _audioManagerPrefab;

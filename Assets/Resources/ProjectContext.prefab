@@ -602,6 +602,7 @@ GameObject:
   - component: {fileID: 4484418892947664712}
   - component: {fileID: 3161041155693412658}
   - component: {fileID: 6580532066947998596}
+  - component: {fileID: 5898412693501362465}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -640,6 +641,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 3161041155693412658}
+  - {fileID: 5898412693501362465}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -668,7 +670,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _adMobController: {fileID: 6580532066947998596}
   _iapService: {fileID: 4518525001007614604}
-  _scriptableHolder: {fileID: 0}
 --- !u!114 &6580532066947998596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,6 +685,20 @@ MonoBehaviour:
   _isProdaction: 0
   noAdsKey: NoAds
   _settings: {fileID: 11400000, guid: 02e07132845cd40e88068bb7587771ec, type: 2}
+--- !u!114 &5898412693501362465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461082093803804320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbc0a17bbb819a4c940e0dd4e71a157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioManagerPrefab: {fileID: 8397956154648679912, guid: 6f6e23e04078a7740b78f7749b3d2f93,
+    type: 3}
 --- !u!1 &2986711291549073477
 GameObject:
   m_ObjectHideFlags: 0
