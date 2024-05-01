@@ -8,7 +8,8 @@ public enum PopupType
     StartLevelPopup=1,
     StartingTutorialPopup=2,
     LevelResultPopup=3,
-    DiamondShop=4
+    DiamondShop=4,
+    BoosterShop=5
 }
 public interface IPopupManager
 {

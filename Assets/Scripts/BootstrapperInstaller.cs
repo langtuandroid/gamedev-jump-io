@@ -14,6 +14,7 @@ public class BootstrapperInstaller : MonoInstaller
     {
         Container.Bind<IPopupManager>().FromInstance(popupManager).AsSingle();
         Container.Bind<GameManager>().FromInstance(gameManager).AsSingle();
+        Container.Bind<PlayerBehaviour>().FromInstance(FindAnyObjectByType<PlayerBehaviour>()).AsSingle();
     }
     private void Start()
     {

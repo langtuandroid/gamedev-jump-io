@@ -56,38 +56,49 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (other.gameObject.CompareTag("FastSpeed"))
         {
-            moveSpeed = fastMoveSpeed;
-            _animator.SetInteger("Character Animator", 7);
-            StartCoroutine(ChangeToNormalSpeed());
-            audioManager.PlayMusic(AudioType.PowerPickUp);
+            FastSpeedUpBooster();
             Destroy(other.gameObject.transform.parent.gameObject);
-            gameManager.FastSpeedOnFunction();
-            GameObject fx = Instantiate(gameManager.tookJumpEffect, transform.position, gameManager.tookJumpEffect.transform.rotation);
-            fx.transform.parent = gameObject.transform;
-            fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
 
         if (other.gameObject.CompareTag("Long Jump"))
         {
-            gameManager.LongJumpOnFunction();
-            audioManager.PlayMusic(AudioType.PowerPickUp);
+            LongUpBooster();
             Destroy(other.gameObject.transform.parent.gameObject);
-            GameObject fx = Instantiate(gameManager.tooklongJumpEffect, transform.position, gameManager.tooklongJumpEffect.transform.rotation);
-            fx.transform.parent = gameObject.transform;
-            fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
 
         if (other.gameObject.CompareTag("Freeze"))
         {
-            gameManager.FreezePlayers();
-            gameManager.FreeeTimerOn();
+            FreezeenemyBooster();
             Destroy(other.gameObject.transform.parent.gameObject);
-            GameObject fx = Instantiate(gameManager.tookFreezeEffect, transform.position, gameManager.tookFreezeEffect.transform.rotation);
-            fx.transform.parent = gameObject.transform;
-            fx.GetComponent<Animator>().Play("TookJumpRotation");
         }
     }
-
+    public void FreezeenemyBooster()
+    {
+        gameManager.FreezePlayers();
+        gameManager.FreeeTimerOn();
+        GameObject fx = Instantiate(gameManager.tookFreezeEffect, transform.position, gameManager.tookFreezeEffect.transform.rotation);
+        fx.transform.parent = gameObject.transform;
+        fx.GetComponent<Animator>().Play("TookJumpRotation");
+    }
+    public void LongUpBooster()
+    {
+        gameManager.LongJumpOnFunction();
+        audioManager.PlayMusic(AudioType.PowerPickUp);
+        GameObject fx = Instantiate(gameManager.tooklongJumpEffect, transform.position, gameManager.tooklongJumpEffect.transform.rotation);
+        fx.transform.parent = gameObject.transform;
+        fx.GetComponent<Animator>().Play("TookJumpRotation");
+    }
+    public void FastSpeedUpBooster()
+    {
+        moveSpeed = fastMoveSpeed;
+        _animator.SetInteger("Character Animator", 7);
+        StartCoroutine(ChangeToNormalSpeed());
+        audioManager.PlayMusic(AudioType.PowerPickUp);
+        gameManager.FastSpeedOnFunction();
+        GameObject fx = Instantiate(gameManager.tookJumpEffect, transform.position, gameManager.tookJumpEffect.transform.rotation);
+        fx.transform.parent = gameObject.transform;
+        fx.GetComponent<Animator>().Play("TookJumpRotation");
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("CrystalWall"))
