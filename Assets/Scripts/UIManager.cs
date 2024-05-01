@@ -6,6 +6,7 @@ using Zenject;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Text levelNoText;
+    [SerializeField] private Button boosterShopBtn;
 
     [Space]
     [Header("For Player")]
@@ -23,6 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider otherPlayer2Slider;
     [SerializeField] private Transform otherPlayer2StartPosition;
 
+
     [Inject] private IPopupManager popusManager;
     [Inject] private GameManager gameManager;
     private int _levelIndex;
@@ -32,8 +34,14 @@ public class UIManager : MonoBehaviour
         gameManager.ON_LEVEL_COMPLETED_ACTION += OnLevelCompletedAction;
         _levelIndex = SceneManager.GetActiveScene().buildIndex;
         levelNoText.text = "Level " + _levelIndex;
-    }
 
+        boosterShopBtn.onClick.AddListener(OpenBoosterShop);
+    }
+    private void OpenBoosterShop()
+    {
+        Time.timeScale = 0;
+        popusManager.ShowPopup(PopupType.BoosterShop);
+    }
     private void OnLevelCompletedAction(int place)
     {
         levelNoText.gameObject.SetActive(false);
