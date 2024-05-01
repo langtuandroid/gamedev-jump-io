@@ -7,13 +7,14 @@ public class TrajectoryManager : MonoBehaviour
     public static TrajectoryManager Instance;
 
     public float carMoveSpeed;
-    public GameObject objectToMove;
-    public Transform startPoint, targetPosition;
+    private GameObject objectToMove;
+    private Transform  targetPosition;
+    private Transform startPoint;
     public bool done;
     public float trajectoryMaxHeight;
     public List<Vector3> points = new();
     public LineRenderer lineRenderer;
-    public Rigidbody rb;
+    private Rigidbody rb;
     public int counterForGravity;
     public bool inAction;
 
@@ -27,6 +28,11 @@ public class TrajectoryManager : MonoBehaviour
     private void Awake()
     {
         if (!Instance) Instance = this;
+
+        targetPosition = transform;
+        objectToMove = transform.parent.gameObject;
+        startPoint = transform.parent;
+        rb = transform.parent.GetComponent<Rigidbody>();
     }
 
     private void Start() => lineRenderer.positionCount = points.Count;

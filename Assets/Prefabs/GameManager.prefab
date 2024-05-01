@@ -93,7 +93,7 @@ MonoBehaviour:
   trailEffectRighttHand: {fileID: 0}
   smallTrajectory: {fileID: 0}
   longTrajectory: {fileID: 0}
-  longJumpControlTimer: 0
+  longJumpControlTimer: 0.8
   calculated: 0
   gotPower: 0
   otherPlayerFreeze: 0
