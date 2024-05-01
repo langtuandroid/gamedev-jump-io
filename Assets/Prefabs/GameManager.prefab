@@ -76,12 +76,18 @@ MonoBehaviour:
   integerTimer: 0
   timer: {fileID: 0}
   startTimer: {fileID: 0}
-  jumpEffect: {fileID: 0}
-  finishEffect: {fileID: 0}
-  freezEffect: {fileID: 0}
-  tookJumpEffect: {fileID: 0}
-  tooklongJumpEffect: {fileID: 0}
-  tookFreezeEffect: {fileID: 0}
+  jumpEffect: {fileID: 1600999814721715290, guid: 4b44480f5510eff45b737de4a786184e,
+    type: 3}
+  finishEffect: {fileID: 5034720074255749435, guid: 658ee3118a0c16e4ba03151702f83dca,
+    type: 3}
+  freezEffect: {fileID: 2683974755588673072, guid: 53969c893d15576478169b441e56a98a,
+    type: 3}
+  tookJumpEffect: {fileID: 8445155553882483805, guid: 036e1b9f7493e6c4fa2d1ed441bee35a,
+    type: 3}
+  tooklongJumpEffect: {fileID: 1187740688984945925, guid: 18e5a8ea46dee86459dfc88696af4c65,
+    type: 3}
+  tookFreezeEffect: {fileID: 7707945149936882728, guid: ac4260c437a462940b65be8b512940dd,
+    type: 3}
   trailEffectSpine: {fileID: 0}
   trailEffectLeftHand: {fileID: 0}
   trailEffectRighttHand: {fileID: 0}

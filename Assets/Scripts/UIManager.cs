@@ -35,7 +35,12 @@ public class UIManager : MonoBehaviour
         _levelIndex = SceneManager.GetActiveScene().buildIndex;
         levelNoText.text = "Level " + _levelIndex;
 
-       // boosterShopBtn.onClick.AddListener(OpenBoosterShop);
+        boosterShopBtn.onClick.AddListener(OpenBoosterShop);
+    }
+    private void OpenBoosterShop()
+    {
+        Time.timeScale = 0;
+        popusManager.ShowPopup(PopupType.BoosterShop);
     }
     private void OpenDiamodShop()
     {
