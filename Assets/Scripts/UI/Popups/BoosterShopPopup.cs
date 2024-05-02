@@ -18,16 +18,23 @@ public class BoosterShopPopup : BasePopup
     [Inject] private GameManager _gameManager;
     [Inject] private IPopupManager popupsManager;
     [Inject] private PlayerBehaviour _playerBehaviour;
+    [Inject] private Wallet _wallet;
     private void Awake()
     {
         _backBtn.onClick.AddListener(BackBtnOnClick);
         buyFreezeBoosterBtn.onClick.AddListener(buyFreezeBoosterBtnOnClick);
         buySpeedUpBoosterBtn.onClick.AddListener(buySpeedUpBoosterBtnOnClick);
         buyJumpUpBoosterBtn.onClick.AddListener(buyJumpUpBoosterBtnOnClick);
+        diamontBtn.onClick.AddListener(() => { popupsManager.ShowPopup(PopupType.DiamondShop); });
+        _wallet.GemsChange.AddListener((int a) => { diamondValueText.text = a.ToString(); });
     }
     private void OnEnable()
     {
         CheckAvailbleBooster();
+    }
+    private void Start()
+    {
+        diamondValueText.text = _wallet.GetGems().ToString();
     }
     private void BackBtnOnClick()
     {
@@ -55,18 +62,30 @@ public class BoosterShopPopup : BasePopup
     }
     private void buyFreezeBoosterBtnOnClick()
     {
-        _playerBehaviour.FreezeenemyBooster();
-        CheckAvailbleBooster();
+        if (_wallet.GetGems() >= 100)
+        {
+            _wallet.SetGems(-100);
+            _playerBehaviour.FreezeenemyBooster();
+            CheckAvailbleBooster();
+        }
     }
     private void buySpeedUpBoosterBtnOnClick()
     {
-        _playerBehaviour.FastSpeedUpBooster();
-        CheckAvailbleBooster();
+        if (_wallet.GetGems() >= 100)
+        {
+            _wallet.SetGems(-100);
+            _playerBehaviour.FastSpeedUpBooster();
+            CheckAvailbleBooster();
+        }
     }
     private void buyJumpUpBoosterBtnOnClick()
     {
-        _gameManager.trajectoryOn = false;
-        _playerBehaviour.LongUpBooster();
-        CheckAvailbleBooster();
+        if (_wallet.GetGems() >= 100)
+        {
+            _wallet.SetGems(-100);
+            _gameManager.trajectoryOn = false;
+            _playerBehaviour.LongUpBooster();
+            CheckAvailbleBooster();
+        }
     }
 }

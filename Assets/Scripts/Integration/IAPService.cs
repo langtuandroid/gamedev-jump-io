@@ -35,6 +35,7 @@ namespace Integration
         private string _buy3000Id;
         
         private AdMobController _adMobController;
+        [Inject] private Wallet _wallet;
 
         [Inject]
         private void Construct (AdMobController adMobController)
@@ -258,18 +259,22 @@ namespace Integration
             }
             else if (String.Equals(args.purchasedProduct.definition.id, _buy100Id, StringComparison.Ordinal))
             {
+                _wallet.SetGems(100);
                 Debug.Log($"ProcessPurchase: PASS. Product: '{args.purchasedProduct.definition.id}'");
             }
             else if (String.Equals(args.purchasedProduct.definition.id, _buy300Id, StringComparison.Ordinal))
             {
+                _wallet.SetGems(300);
                 Debug.Log($"ProcessPurchase: PASS. Product: '{args.purchasedProduct.definition.id}'");
             }
             else if (String.Equals(args.purchasedProduct.definition.id, _buy1000Id, StringComparison.Ordinal))
             {
+                _wallet.SetGems(1000);
                 Debug.Log($"ProcessPurchase: PASS. Product: '{args.purchasedProduct.definition.id}'");
             }
             else if (String.Equals(args.purchasedProduct.definition.id, _buy3000Id, StringComparison.Ordinal))
             {
+                _wallet.SetGems(3000);
                 Debug.Log($"ProcessPurchase: PASS. Product: '{args.purchasedProduct.definition.id}'");
             }
             else

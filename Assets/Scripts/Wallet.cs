@@ -18,7 +18,7 @@ public class Wallet : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("firstStart"))
         {
-            SetGems(10);
+            SetGems(200);
             PlayerPrefs.SetInt("firstStart", 1);
         }
     }
