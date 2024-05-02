@@ -3,15 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using Zenject;
+using Integration;
 public class LevelResultPopup : BasePopup
 {
     [SerializeField] private GameObject restartLevelBtn;
     [SerializeField] private GameObject nextLevelBtn;
+    [Inject] private AdMobController adMobController;
+
+    bool isWin = false;
     private void Start()
     {
         restartLevelBtn.GetComponent<Button>().onClick.AddListener(() => Reload()) ;
         nextLevelBtn.GetComponent<Button>().onClick.AddListener(() => Next());
+
+        adMobController.InterstitialAdController.OnAdClosed += () =>
+        {
+            if(isWin==false)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex >= 35 ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
+        };
     }
     public override void AfterShow(string json)
     {
@@ -23,11 +35,15 @@ public class LevelResultPopup : BasePopup
     }
     private void Reload()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        isWin = false;
+        //if(isShowInterstital vs subscription)
+        adMobController.ShowInterstitialAd();
     }
 
     private void Next()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex >= 35 ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
+        isWin = true;
+
+        adMobController.ShowInterstitialAd();
     }
 }

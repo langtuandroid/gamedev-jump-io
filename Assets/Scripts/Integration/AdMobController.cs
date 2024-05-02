@@ -21,6 +21,8 @@ namespace Integration
 		private InterstitialAdController _interstitialAdController;
 		private RewardedAdController _rewardedAdController;
 
+		public InterstitialAdController InterstitialAdController { get { return _interstitialAdController; } }
+
 		public bool IsProdaction => _isProdaction;
 
 		public bool IsPurchased => _isPurchased;

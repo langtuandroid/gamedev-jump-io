@@ -172,13 +172,21 @@ public class GameManager : MonoBehaviour
     {
         slidersParent.SetActive(false);
     }
-
+    public void AddNumberLevelEnd()
+    {
+        if(PlayerPrefs.HasKey("LevelDone")==false)
+        {
+            PlayerPrefs.SetInt("LevelDone", 1);
+        }
+        else
+            PlayerPrefs.SetInt("LevelDone", PlayerPrefs.GetInt("LevelDone")+1);
+    }
+    
     public void CalculatePlayerPositions(int playerNumber, int playerPosition)
     {
         players[playerNumber].transform.position = playerPos[playerPosition].position;
         players[playerNumber].GetComponent<Animator>().SetInteger("WinAnimation", (playerPosition + 1));
     }
-
     public void CalculateOtherPlayers()
     {
 
