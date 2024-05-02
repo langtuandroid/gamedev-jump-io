@@ -2342,9 +2342,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carMoveSpeed: 10
-  objectToMove: {fileID: 723524220}
-  startPoint: {fileID: 723524224}
-  targetPosition: {fileID: 210608350}
   done: 0
   trajectoryMaxHeight: 8
   points:
@@ -2370,7 +2367,6 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   lineRenderer: {fileID: 595110518}
-  rb: {fileID: 723524221}
   counterForGravity: 0
   inAction: 0
 --- !u!95 &210608352
@@ -51380,6 +51376,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 723524224}
     m_Modifications:
+    - target: {fileID: 2709709870428292507, guid: f584a121adc51654897739520eef0c0b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4055335062239331198, guid: f584a121adc51654897739520eef0c0b,
         type: 3}
       propertyPath: rb
@@ -51454,6 +51455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Long Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667093035037364575, guid: f584a121adc51654897739520eef0c0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
