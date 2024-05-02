@@ -104,6 +104,7 @@ public class TrajectoryManager : MonoBehaviour
     void MoveTowards()
     {
         if (!_gotPoints) return;
+        Debug.Log("MoveTowards");
 
         float dis = Vector3.Distance(objectToMove.transform.position, points[_count]);
 

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 using Integration;
+using UnityEngine.Events;
+
 public class BoosterShopPopup : BasePopup
 {
     [SerializeField] private Button _backBtn;
@@ -28,7 +30,9 @@ public class BoosterShopPopup : BasePopup
     private void BackBtnOnClick()
     {
         popupsManager.HideCurrentPopup(); Time.timeScale = 1;
+        _gameManager.EnableJump();
     }
+    
     private void CheckAvailbleBooster()
     {
         if(_gameManager.otherPlayerFreeze ||_gameManager.fastSpeedOn)
@@ -59,6 +63,7 @@ public class BoosterShopPopup : BasePopup
     }
     private void buyJumpUpBoosterBtnOnClick()
     {
+        _gameManager.trajectoryOn = false;
         _playerBehaviour.LongUpBooster();
         CheckAvailbleBooster();
     }

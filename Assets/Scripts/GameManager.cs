@@ -150,6 +150,15 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    public void EnableJump()
+    {
+        StartCoroutine(WaitAndAction(0.5f, ()=>trajectoryOn = true));
+    }
+    IEnumerator WaitAndAction(float duration, UnityAction action)
+    {
+        yield return new WaitForSeconds(duration);
+        action?.Invoke();
+    }
     public void FireWorks()
     {
         for (int i = 0; i < blast.Count; i++)
