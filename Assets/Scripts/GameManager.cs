@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     public int finishedPlayers;
     [Inject] private IPopupManager _popupsManager;
-
+    [Inject] private PlayerBehaviour _player;
 
 
     private void Awake()

@@ -9,6 +9,9 @@ public class PlayerBehaviour : MonoBehaviour
     public int playerNo;
 
     public bool playerFix;
+/*
+    private bool isJumpPlayer;
+    public bool IsJumpPlayer { get { return isJumpPlayer; } }*/
 
     private int _characterIdleAnimation;
     private float _playerZPos;

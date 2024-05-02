@@ -39,7 +39,7 @@ public class BoosterShopPopup : BasePopup
     private void BackBtnOnClick()
     {
         popupsManager.HideCurrentPopup(); Time.timeScale = 1;
-        _gameManager.EnableJump();
+        //_gameManager.EnableJump();
     }
     
     private void CheckAvailbleBooster()
@@ -83,7 +83,6 @@ public class BoosterShopPopup : BasePopup
         if (_wallet.GetGems() >= 100)
         {
             _wallet.SetGems(-100);
-            _gameManager.trajectoryOn = false;
             _playerBehaviour.LongUpBooster();
             CheckAvailbleBooster();
         }
