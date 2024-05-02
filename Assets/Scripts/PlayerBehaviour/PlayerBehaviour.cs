@@ -55,6 +55,7 @@ public class PlayerBehaviour : MonoBehaviour
             gameManager.FireWorks();
             Instantiate(gameManager.finishEffect, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), gameManager.finishEffect.transform.rotation);
             gameObject.SetActive(false);
+            gameManager.AddNumberLevelEnd();
         }
 
         if (other.gameObject.CompareTag("FastSpeed"))

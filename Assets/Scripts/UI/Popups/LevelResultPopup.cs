@@ -5,45 +5,53 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 using Integration;
+using UnityEngine.Events;
+
 public class LevelResultPopup : BasePopup
 {
-    [SerializeField] private GameObject restartLevelBtn;
-    [SerializeField] private GameObject nextLevelBtn;
-    [Inject] private AdMobController adMobController;
+    [SerializeField] private GameObject restartPanel;
+    [SerializeField] private GameObject succesPanel;
+    [SerializeField] private Button restartBtn;
+    [SerializeField] private Button nextbtn;
 
+    [Inject] private GameManager _gameManager;
     bool isWin = false;
     private void Start()
     {
-        restartLevelBtn.GetComponent<Button>().onClick.AddListener(() => Reload()) ;
-        nextLevelBtn.GetComponent<Button>().onClick.AddListener(() => Next());
-
-        adMobController.InterstitialAdController.OnAdClosed += () =>
-        {
-            if(isWin==false)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            else
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex >= 35 ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
-        };
+        restartBtn.onClick.AddListener(() => Reload()) ;
+        nextbtn.onClick.AddListener(() => Next());
     }
     public override void AfterShow(string json)
     {
         bool isFirstPlace =bool.Parse(json);
         if (isFirstPlace)
-            nextLevelBtn.SetActive(true);
+        {
+            succesPanel.SetActive(true);
+            nextbtn.interactable = false;
+        }
         else
-            restartLevelBtn.SetActive(true);
+        {
+            restartPanel.SetActive(true);
+            restartBtn.interactable = false;
+        }
+        StartCoroutine(WaitAndAction(1,()=> { 
+            _gameManager.AfterLevelLogic();
+            restartBtn.interactable = true;
+            nextbtn.interactable = true; 
+        }));
+    }
+    IEnumerator WaitAndAction(float duration, UnityAction action )
+    {
+        yield return new WaitForSeconds(duration);
+        action?.Invoke();
     }
     private void Reload()
     {
-        isWin = false;
-        //if(isShowInterstital vs subscription)
-        adMobController.ShowInterstitialAd();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Next()
     {
-        isWin = true;
-
-        adMobController.ShowInterstitialAd();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex >= 35 ? 0 : SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

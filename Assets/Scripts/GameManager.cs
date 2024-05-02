@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
-
+using Integration;
 public class GameManager : MonoBehaviour
 {
 
@@ -84,7 +84,8 @@ public class GameManager : MonoBehaviour
     public int finishedPlayers;
     [Inject] private IPopupManager _popupsManager;
     [Inject] private PlayerBehaviour _player;
-
+    [Inject] private AdMobController _adMobController;
+    [Inject] private IAPService _iAPService;
 
     private void Awake()
     {
@@ -180,6 +181,13 @@ public class GameManager : MonoBehaviour
         }
         else
             PlayerPrefs.SetInt("LevelDone", PlayerPrefs.GetInt("LevelDone")+1);
+    }
+    public void AfterLevelLogic()
+    {
+        if (PlayerPrefs.GetInt("LevelDone") % 3 == 1)
+            _adMobController.ShowInterstitialAd();
+        if (PlayerPrefs.GetInt("LevelDone") % 3 == 2)
+            _iAPService.ShowSubscriptionPanel();
     }
     
     public void CalculatePlayerPositions(int playerNumber, int playerPosition)

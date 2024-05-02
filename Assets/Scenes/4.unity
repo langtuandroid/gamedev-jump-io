@@ -51484,10 +51484,20 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 542694851637721689, guid: a2201ffb3014d3d4a95b1ef40abc423c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1274958724313756003, guid: a2201ffb3014d3d4a95b1ef40abc423c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 209.41016
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305267137552765832, guid: a2201ffb3014d3d4a95b1ef40abc423c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1327958550289898301, guid: a2201ffb3014d3d4a95b1ef40abc423c,
         type: 3}
@@ -51507,6 +51517,11 @@ PrefabInstance:
     - target: {fileID: 1707993446129137859, guid: a2201ffb3014d3d4a95b1ef40abc423c,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711975894078766013, guid: a2201ffb3014d3d4a95b1ef40abc423c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1891548109316447644, guid: a2201ffb3014d3d4a95b1ef40abc423c,
@@ -51542,6 +51557,11 @@ PrefabInstance:
     - target: {fileID: 2107521836896436731, guid: a2201ffb3014d3d4a95b1ef40abc423c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2713499076051750575, guid: a2201ffb3014d3d4a95b1ef40abc423c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3481297881181060912, guid: a2201ffb3014d3d4a95b1ef40abc423c,
@@ -51844,6 +51864,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970063213497573520, guid: a2201ffb3014d3d4a95b1ef40abc423c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9207581462025365921, guid: a2201ffb3014d3d4a95b1ef40abc423c,
         type: 3}
