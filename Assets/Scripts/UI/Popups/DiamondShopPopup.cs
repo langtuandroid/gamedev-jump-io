@@ -14,6 +14,7 @@ public class DiamondShopPopup : BasePopup
     [SerializeField] private Button buyDiamond3000Btn;
 
     [Inject] private IPopupManager popupsManager;
+    [Inject] private GameManager _gameManager;
     [Inject] private IAPService _IAPService;
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class DiamondShopPopup : BasePopup
     private void BackBtnOnClick()
     {
         popupsManager.HideCurrentPopup(); Time.timeScale = 1;
+        _gameManager.EnableJump();
     }
 
 }

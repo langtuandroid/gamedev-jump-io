@@ -12,6 +12,8 @@ public class BoosterShopPopup : BasePopup
     [SerializeField] private Button buyFreezeBoosterBtn;
     [SerializeField] private Button buySpeedUpBoosterBtn;
     [SerializeField] private Button buyJumpUpBoosterBtn;
+    [SerializeField] private Button diamontBtn;
+    [SerializeField] private Text diamondValueText;
 
     [Inject] private GameManager _gameManager;
     [Inject] private IPopupManager popupsManager;
