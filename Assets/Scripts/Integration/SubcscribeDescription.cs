@@ -9,8 +9,6 @@ using UnityEngine.EventSystems;
 public class SubcscribeDescription : MonoBehaviour , IPointerClickHandler
 {
     [SerializeField] 
-    private AdMobController _adMobController;
-    [SerializeField] 
     private GDPRLinksHolder _gdprLinksHolder;
     [SerializeField] 
     private TextMeshProUGUI _descriptionText;
@@ -21,8 +19,8 @@ public class SubcscribeDescription : MonoBehaviour , IPointerClickHandler
     
     private void Start()
     {
-        _privacyLink = _adMobController.IsProdaction ? _gdprLinksHolder.PrivacyPolicy : _gdprLinksHolder.PrivacyPolicyTest;
-        _termsLink = _adMobController.IsProdaction ? _gdprLinksHolder.TermsOfUse : _gdprLinksHolder.TermsOfUseTest;
+        _privacyLink =  _gdprLinksHolder.PrivacyPolicy;
+        _termsLink =  _gdprLinksHolder.TermsOfUse;
         RefreshDescription();
     }
 

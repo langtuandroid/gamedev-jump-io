@@ -12,7 +12,6 @@ namespace Integration
 
 	public class AdMobController : MonoBehaviour
 	{
-		[SerializeField] private bool _isProdaction;
 		public string noAdsKey = "NoAds";
 		[SerializeField] private AdMobSettings _settings;
 		
@@ -21,12 +20,7 @@ namespace Integration
 		private InterstitialAdController _interstitialAdController;
 		private RewardedAdController _rewardedAdController;
 
-		public InterstitialAdController InterstitialAdController { get { return _interstitialAdController; } }
-
-		public bool IsProdaction => _isProdaction;
-
 		public bool IsPurchased => _isPurchased;
-
 
 		[Inject]
 		private void Construct(
@@ -48,11 +42,10 @@ namespace Integration
 
 		private void Start()
 		{
-			_bannerViewController.BannerId = IsProdaction ? _settings.BannerID : _settings.BannerTestID;
-			_interstitialAdController.InterstitialId = IsProdaction ? _settings.InterstitialID : _settings.InterstitialTestID;
-			_rewardedAdController.RewardedId = IsProdaction ? _settings.RewardedID : _settings.RewardedTestID;
+			_bannerViewController.BannerId = _settings.BannerID;
+			_interstitialAdController.InterstitialId = _settings.InterstitialID;
+			_rewardedAdController.RewardedId = _settings.RewardedID;
 			LoadAllAds();
-			ShowBanner(true);
 		}
 
 		private void LoadAllAds()
