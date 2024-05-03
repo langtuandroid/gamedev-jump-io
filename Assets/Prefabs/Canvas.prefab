@@ -7843,6 +7843,7 @@ MonoBehaviour:
   otherPlayer1StartPosition: {fileID: 0}
   otherPlayer2Slider: {fileID: 0}
   otherPlayer2StartPosition: {fileID: 0}
+  boosterShop: {fileID: 777644325567618980}
 --- !u!1 &7864692534402730216
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider otherPlayer2Slider;
     [SerializeField] private Transform otherPlayer2StartPosition;
 
+    [SerializeField] private GameObject boosterShop;
 
     [Inject] private IPopupManager popusManager;
     [Inject] private GameManager gameManager;
@@ -49,6 +50,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnLevelCompletedAction(int place)
     {
+        boosterShop.gameObject.SetActive(false);
         levelNoText.gameObject.SetActive(false);
         popusManager.ShowPopup(PopupType.LevelResultPopup, (place==1).ToString());
         _levelIndex++;
