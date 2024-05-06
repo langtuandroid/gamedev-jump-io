@@ -21,7 +21,7 @@ MonoBehaviour:
   _buy3000Id: 
   _subscriptionMonthID_Test: sub.gamedev.test.one.month
   _subscriptionYearID_Test: sub.gamedev.test.one.year
-  _subscriptionForeverID_Test: sub.gamedev.test.forever
+  _subscriptionForeverID_Test: sub.gamedev.deletead.forever
   _buy100Id_Test: test.gamedev.buy100
   _buy300Id_Test: test.gamedev.buy300
   _buy1000Id_Test: test.gamedev.buy1000
